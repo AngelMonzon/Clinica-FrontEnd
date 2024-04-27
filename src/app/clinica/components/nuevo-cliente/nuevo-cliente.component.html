@@ -1,0 +1,81 @@
+<div class="form-container">
+
+  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <!-- Nombre -->
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" formControlName="nombre" required pInputText>
+      <div *ngIf="clienteForm.get('nombre')?.touched && clienteForm.get('nombre')?.hasError('required')"
+            class="label-danger">
+        <p>El nombre es obligatorio.</p>
+      </div>
+      <div *ngIf="clienteForm.get('nombre')?.touched && clienteForm.get('nombre')?.hasError('pattern')"
+            class="label-danger">
+        <p>El nombre debe tener al menos 3 letras.</p>
+      </div>
+    </div>
+
+    <!-- Edad -->
+    <div class="form-group">
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" formControlName="edad" pInputText>
+      <div *ngIf="clienteForm.get('edad')?.touched && clienteForm.get('edad')?.hasError('required')"
+            class="label-danger">
+        <p>La edad es obligatoria.</p>
+      </div>
+      <div *ngIf="clienteForm.get('edad')?.touched && clienteForm.get('edad')?.hasError('min')"
+            class="label-danger">
+        <p>La edad no puede ser negativa.</p>
+      </div>
+    </div>
+
+    <!-- Género -->
+    <div class="form-group">
+      <label for="genero">Género:</label>
+      <select class="custom-select" formControlName="genero">
+        <option *ngFor="let genero of generos" [value]="genero.name">{{ genero.name }}</option>
+      </select>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" pInputText>
+      <div *ngIf="clienteForm.get('email')?.touched && clienteForm.get('email')?.hasError('email')"
+            class="label-danger">
+        <p>Ingrese un correo valido.</p>
+      </div>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="form-group">
+      <label for="telefono">Teléfono:</label>
+      <input type="tel" id="telefono" formControlName="telefono" pInputText>
+    </div>
+
+    <!-- Contacto -->
+    <div class="form-group">
+      <label for="contacto">Contacto:</label>
+      <input type="text" id="contacto" formControlName="contacto" pInputText>
+    </div>
+
+    <!-- Teléfono 2 -->
+    <div class="form-group">
+      <label for="telefono2">Teléfono 2:</label>
+      <input type="tel" id="telefono2" formControlName="telefono2" pInputText>
+    </div>
+
+    <div class="form-group">
+      <span class="p-float-label">
+        <p-calendar formControlName="fechaRegistro" inputId="fechaRegistro"></p-calendar>
+        <label for="fechaRegistro">Fecha de Registro</label>
+        </span>
+    </div>
+
+
+    <button class="submit-boton" type="submit"
+    [disabled]="clienteForm.invalid" pButton>Crear Paciente</button>
+
+  </form>
+</div>

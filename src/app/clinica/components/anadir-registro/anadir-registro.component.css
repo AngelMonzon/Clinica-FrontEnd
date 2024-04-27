@@ -1,0 +1,40 @@
+:host {
+  width: 100%;
+}
+
+.card {
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.card div {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin: 0 10%;
+  margin-bottom: 20px;
+}
+
+.card div button {
+  margin: 10px 5%;
+}
+
+.float-label {
+  display: inline-block;
+  width: 30%;
+  margin: 15px 1.5%;
+}
+
+.float-label input {
+  width: 100%;
+}
+
+.observaciones {
+  width: 65%;
+  margin: 10px 5%;
+}
+
+.observaciones input {
+  width: 100%;
+}
+

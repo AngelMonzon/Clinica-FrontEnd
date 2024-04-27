@@ -1,0 +1,24 @@
+<div class="container">
+
+  <!-- Parte de arriba -->
+  <div class="arriba">
+    <div class="usuario">
+      <div class="imagen"><img src="assets/images/dentista.png" alt=""></div>
+      <div class="nombre">
+        Admin - ADMIN
+      </div>
+    </div>
+
+    <button pButton (click)="showNew()">
+      <img src="assets/images/anadir.png" alt="">
+      Nuevo Paciente
+    </button>
+  </div>
+
+
+  <div class="tabla">
+    <app-tabla-clientes></app-tabla-clientes>
+  </div>
+
+  <p-toast></p-toast>
+</div>

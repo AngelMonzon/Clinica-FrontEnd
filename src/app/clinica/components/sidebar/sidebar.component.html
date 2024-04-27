@@ -1,0 +1,14 @@
+<div class="admin">
+  <img src="assets/images/admin.png" alt="">
+  <h4>Administrador</h4>
+</div>
+
+<div class="seleccion">
+
+  <div *ngFor="let item of items">
+    <button [routerLink]="item.link">
+      {{ item.titulo }}
+    </button>
+  </div>
+
+</div>

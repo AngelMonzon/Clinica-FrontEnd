@@ -1,0 +1,17 @@
+<div class="card">
+  <p-floatLabel *ngFor="let input of inputs" class="float-label">
+    <input [id]="input" type="text" pInputText/>
+    <label [for]="input"> {{ input }} </label>
+  </p-floatLabel>
+
+  <div>
+    <p-floatLabel class="observaciones">
+      <input id="observaciones" type="text" pInputText/>
+      <label for="observaciones">Observaciones</label>
+    </p-floatLabel>
+
+    <button pButton type="submit">Guardar</button>
+  </div>
+
+
+</div>

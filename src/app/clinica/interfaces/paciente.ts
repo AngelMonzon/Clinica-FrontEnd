@@ -1,0 +1,29 @@
+export interface Paciente {
+  id:                     number;
+  doctor:                 string;
+  paciente:               string;
+  edad:                   number;
+  sexo:                   string;
+  domicilio:              string;
+  bajoTratamiento:        string;
+  fechaRegistro:          Date;
+  telefonoDoctor:         string;
+  algunMedicamento:       string;
+  aparatoRespiratorio:    boolean;
+  aparatoDigestivo:       boolean;
+  aparatoCardiovascular:  boolean;
+  sistemaNervioso:        boolean;
+  problemasDeCoagulacion: boolean;
+  desmayos:               boolean;
+  diabetes:               boolean;
+  tiroides:               boolean;
+  fuma:                   boolean;
+  alcohol:                boolean;
+  drogas:                 boolean;
+  otros:                  string;
+  embarazada:             boolean;
+  meses:                  number;
+  anticonceptivos:        boolean;
+  tipoAnticonceptivo:     string;
+  higieneBucal:           string;
+}

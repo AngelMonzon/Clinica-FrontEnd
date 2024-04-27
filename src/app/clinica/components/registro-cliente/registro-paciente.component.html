@@ -1,0 +1,216 @@
+<div class="card">
+  <div class="flex mb-3 gap-2 justify-content-start align-content-center">
+    <Label class="flex align-content-center flex-wrap	font-bold">Editar</Label>
+    <p-selectButton [options]="stateOptions" optionLabel="label" optionValue="value" [ngModel]="editar"  (onOptionClick)="toggleEditar()"></p-selectButton>
+  </div>
+  <div class="flex mb-3 gap-2 justify-content-end">
+    <p-button (click)="activeIndex = 0" rounded="true" label="1" styleClass="w-2rem h-2rem p-0" [outlined]="activeIndex !== 0"></p-button>
+    <p-button (click)="activeIndex = 1" rounded="true" label="2" styleClass="w-2rem h-2rem p-0" [outlined]="activeIndex !== 1"></p-button>
+    <p-button (click)="activeIndex = 2" rounded="true" label="3" styleClass="w-2rem h-2rem p-0" [outlined]="activeIndex !== 2"></p-button>
+  </div>
+
+
+<p-accordion (activeIndexChange)="activeIndexChange($event)" [activeIndex]="activeIndex" [multiple]="false">
+  <p-accordionTab header="Datos Personales">
+
+    <form [formGroup]="formulario" >
+      <div class="grid-container">
+        <!-- Primera columna -->
+        <div class="grid-item">
+          <label for="doctor">Doctor:</label>
+          <input pInputText type="text" id="doctor" name="doctor" formControlName="doctor">
+        </div>
+
+        <div class="grid-item">
+          <label for="paciente">Paciente:</label>
+          <input pInputText type="text" id="paciente" name="paciente" formControlName="paciente">
+        </div>
+
+        <div class="grid-item">
+          <label for="domicilio">Domicilio:</label>
+          <input pInputText type="text" id="domicilio" name="domicilio" formControlName="domicilio">
+        </div>
+
+        <!-- Segunda columna -->
+        <div class="grid-item">
+          <label for="edad">Edad:</label>
+          <input pInputText type="number" id="edad" name="edad" formControlName="edad">
+        </div>
+
+        <div class="grid-item">
+          <label for="sexo">Sexo:</label>
+          <select formControlName="sexo" class="custom-select" id="sexo">
+            <option value="" disabled selected>Sexo</option>
+            <option *ngFor="let genero of generos" [value]="genero.code">{{ genero.name }}</option>
+          </select>
+        </div>
+
+        <div class="grid-item">
+          <label for="tratamiento">Bajo tratamiento:</label>
+          <select formControlName="tratamiento" class="custom-select" id="tratamiento">
+            <option *ngFor="let tratamiento of tratamientos" [value]="tratamiento.code">
+              {{ tratamiento.name }}
+            </option>
+          </select>
+        </div>
+
+
+        <!-- Tercera columna -->
+        <div class="grid-item">
+          <label for="fecha">Fecha de primer tratamiento</label>
+          <input type="date" formControlName="fecha" class="custom-select">
+        </div>
+
+        <div class="grid-item">
+          <label for="nombreDoctor">Teléfono del doctor:</label>
+          <input pInputText type="text" id="nombreDoctor" name="nombreDoctor" formControlName="telefonoDoctor">
+        </div>
+
+        <div class="grid-item">
+          <label for="medicamento">¿Toma algún medicamento?</label>
+          <input pInputText type="text" id="medicamento" name="medicamento" formControlName="medicamento">
+        </div>
+      </div>
+
+      <div class="flex justify-content-end w-full mt-3" *ngIf="editar">
+        <button pButton type="button" (click)="onSubmit()">Guardar</button>
+      </div>
+    </form>
+
+
+  </p-accordionTab>
+
+
+  <!-- Antecedentes personales -->
+
+  <p-accordionTab header="Antecedentes Personales">
+
+    <Form [formGroup]="antecedentesForm">
+      <div class="antecedentes-container-up">
+        <!-- Primera columna -->
+        <div class="antecedentes-item">
+          <label for="aparatoRespiratorio">Aparato Respiratorio:</label>
+          <p-checkbox id="aparatoRespiratorio" name="aparatoRespiratorio" formControlName="aparatoRespiratorio" [binary]="true"></p-checkbox>
+        </div>
+
+        <div class="antecedentes-item">
+          <label for="aparatoDigestivo">Aparato Digestivo:</label>
+          <p-checkbox id="aparatoDigestivo" name="aparatoDigestivo" [binary]="true" formControlName="aparatoDigestivo"></p-checkbox>
+        </div>
+
+        <div class="antecedentes-item">
+          <label for="aparatoCardiovascular">Aparato Cardiovascular:</label>
+          <p-checkbox id="aparatoCardiovascular" name="aparatoCardiovascular" [binary]="true" formControlName="aparatoCardiovascular"></p-checkbox>
+        </div>
+
+        <!-- Segunda columna -->
+        <div class="antecedentes-item">
+          <label for="sistemaNervioso">Sistema Nervioso:</label>
+          <p-checkbox id="sistemaNervioso" name="sistemaNervioso" [binary]="true" formControlName="sistemaNervioso"></p-checkbox>
+        </div>
+
+        <div class="antecedentes-item">
+          <label for="coagulacion">Problemas de Coagulación:</label>
+          <p-checkbox id="coagulacion" name="coagulacion" [binary]="true" formControlName="coagulacion"></p-checkbox>
+        </div>
+
+        <div class="antecedentes-item">
+          <label for="desmayos">Desmayos:</label>
+          <p-checkbox id="desmayos" name="desmayos" [binary]="true" formControlName="desmayos"></p-checkbox>
+        </div>
+
+        <!-- Tercera columna -->
+        <div class="antecedentes-item">
+          <label for="diabetes">Diabetes:</label>
+          <p-checkbox id="diabetes" name="diabetes" [binary]="true" formControlName="diabetes"></p-checkbox>
+        </div>
+
+        <div class="antecedentes-item">
+          <label for="tiroides">Tiroides:</label>
+          <p-checkbox id="tiroides" name="tiroides" [binary]="true" formControlName="tiroides"></p-checkbox>
+        </div>
+
+
+        <div class="antecedentes-item">
+          <label for="fuma">Fuma:</label>
+          <p-checkbox id="fuma" name="fuma" [binary]="true" formControlName="fuma"></p-checkbox>
+        </div>
+
+        <div class="antecedentes-item">
+          <label for="alcohol">Bebe alcohol:</label>
+          <p-checkbox id="alcohol" name="alcohol" [binary]="true" formControlName="alcohol"></p-checkbox>
+        </div>
+
+        <div class="antecedentes-item">
+          <label for="drogas">Consume drogas:</label>
+          <p-checkbox id="drogas" name="drogas" [binary]="true" formControlName="drogas"></p-checkbox>
+        </div>
+
+        <div class="antecedentes-item">
+          <label for="otros">Otros:</label>
+          <input pInputText type="text" id="otros" name="otros" formControlName="otros">
+        </div>
+
+
+
+      </div>
+
+      <!-- Abajo -->
+
+      <div class="antecedentes-container-down">
+
+        <div class="antecedentes-item down">
+          <label for="embarazada">¿Se encuentra embarazada?</label>
+          <p-checkbox id="embarazada" name="embarazada" [binary]="true" formControlName="embarazada"></p-checkbox>
+        </div>
+
+        <div class="antecedentes-item down">
+          <label for="mesesEmbarazo">Meses de embarazo:</label>
+          <select formControlName="mesesEmbarazo" class="custom-select" id="mesesEmbarazo">
+            <option *ngFor="let mes of meses" [value]="mes.code">
+              {{ mes.name }}
+            </option>
+          </select>
+        </div>
+
+
+        <div class="antecedentes-item down">
+          <label for="higieneBucal">Higiene bucal:</label>
+          <select formControlName="higieneBucal" class="custom-select" id="higieneBucal">
+            <option *ngFor="let higiene of higieneBucal" [value]="higiene.code">
+              {{ higiene.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="antecedentes-item down">
+          <label for="anticonceptivos">Usa anticonceptivos:</label>
+          <p-checkbox id="anticonceptivos" name="anticonceptivos" [binary]="true" formControlName="anticonceptivos"></p-checkbox>
+        </div>
+
+        <!-- Quinta columna -->
+        <div class="antecedentes-item down">
+          <label for="tipoAnticonceptivo">Tipo de anticonceptivo:</label>
+          <input pInputText type="text" id="tipoAnticonceptivo" name="tipoAnticonceptivo" formControlName="tipoAnticonceptivo">
+        </div>
+
+      </div>
+
+      <div class="flex justify-content-end w-full mt-3" *ngIf="editar">
+        <button pButton type="button" (click)="onSubmit()">Guardar</button>
+      </div>
+
+    </Form>
+
+
+
+
+  </p-accordionTab>
+  <p-accordionTab header="Historial ">
+      <app-tabla-paciente></app-tabla-paciente>
+  </p-accordionTab>
+</p-accordion>
+
+</div>
+
+<p-toast></p-toast>

@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="header">
+    <app-header></app-header>
+  </div>
+  <div class="sidebar" [ngStyle]="ocultarSidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="contenido" [ngStyle]="contenido">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

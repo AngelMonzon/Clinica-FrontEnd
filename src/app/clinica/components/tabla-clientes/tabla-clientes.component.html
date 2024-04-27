@@ -1,0 +1,144 @@
+<div class="card">
+  <p-table #dt1 [value]="clientes" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 25]" [loading]="loading" [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['id','nombre','edad', 'genero','contacto']" [styleClass]="selectedSize"
+    styleClass="p-datatable-striped" [style]="{'padding': 'px'}">
+    <ng-template pTemplate="caption" style="height: 5px;">
+      <div class="flex" style="height: 50%;">
+        <button pButton label="Clear" class="p-button-outlined h-full" icon="pi pi-filter-slash"
+          (click)="clear(dt1)"></button>
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword"
+            [(ngModel)]="searchValue" />
+        </span>
+      </div>
+    </ng-template>
+    <!-- ... -->
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="max-width: 5px; width: 5%; ">
+          <div class="flex align-items-center">
+            Id
+            <p-columnFilter field="id" display="menu">
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <input type="number" pInputText [ngModel]="value" (input)="applyFilterGlobal($event, 'contains')"
+                  class="p-inputtext">
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Nombre
+            <p-columnFilter type="text" field="nombre" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 5px; width: 14%;">
+          <div class="flex align-items-center">
+            Edad
+            <p-columnFilter type="numeric" field="edad" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Genero
+            <p-columnFilter type="text" field="genero" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Email
+            <p-columnFilter type="email" field="email" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Telefono
+            <p-columnFilter type="text" field="telefono" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Contacto
+            <p-columnFilter type="text" field="contacto" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Registro
+            <p-columnFilter type="date" field="fechaRegistro" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Acciones
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+
+    <!-- ... -->
+
+
+
+
+    <ng-template pTemplate="body" let-cliente>
+      <tr>
+        <td>
+          {{ cliente.id }}
+        </td>
+        <td>
+          <span class="ml-1 vertical-align-middle"> {{ cliente.nombre }} </span>
+        </td>
+        <td>
+          <span class="ml-1 vertical-align-middle"> {{ cliente.edad }} </span>
+        </td>
+        <td>
+          {{ cliente.genero }}
+        </td>
+        <td>
+          {{ cliente.email }}
+        </td>
+        <td>
+          {{ cliente.telefono }}
+        </td>
+        <td>
+          <p-overlayPanel #o>
+            <ng-template pTemplate="content">
+              <span class="font-bold">Nombre:</span> {{ cliente.contacto }} <br>
+              <span class="font-bold">Telefono:</span> {{ cliente.telefono2 }}
+            </ng-template>
+          </p-overlayPanel>
+          <button pButton (click)="o.toggle($event)" icon="pi pi-image" label="Mostrar" class="boton-contacto"></button>
+        </td>
+        <td>
+          {{ cliente.fechaRegistro | date: 'dd-MM-yyyy' }}
+        </td>
+        <td class="opciones">
+          <button pTooltip="Editar" tooltipPosition="top" (click)="showEdit(cliente)">
+            <img src="assets/images/lapiz.png" alt="editar icono">
+          </button>
+          <button pTooltip="Borrar" tooltipPosition="top" (click)="borrarConfirm($event, cliente)">
+            <img src="assets/images/borrar.png" alt="editar icono">
+          </button>
+          <button pTooltip="Registro" tooltipPosition="top" (click)="showDialog(cliente)">
+            <img src="assets/images/registro.png" alt="editar icono">
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7">No se encontraron Pacientes
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-toast></p-toast>
+  <p-confirmDialog></p-confirmDialog>
+
+
+</div>

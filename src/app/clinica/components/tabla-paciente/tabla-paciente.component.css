@@ -1,0 +1,27 @@
+
+.opciones {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.opciones button {
+  width: 27%;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.opciones button:hover {
+  cursor: pointer;
+}
+
+.opciones button:active {
+  transform: scale(1.1, 1.1);
+}
+
+.opciones button img {
+  width: 100%;
+}

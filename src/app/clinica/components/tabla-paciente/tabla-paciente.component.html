@@ -1,0 +1,120 @@
+<app-anadir-registro></app-anadir-registro>
+
+<div class="card">
+  <p-table #dt1 [value]="clientes" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 25]" [loading]="loading" [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['id','nombre','edad', 'genero','contacto']" [styleClass]="selectedSize"
+    styleClass="p-datatable-striped" [style]="{'padding': 'px'}">
+    <ng-template pTemplate="caption" style="height: 5px;">
+      <div class="flex" style="height: 50%;">
+        <button pButton label="Clear" class="p-button-outlined h-full" icon="pi pi-filter-slash"
+          (click)="clear(dt1)"></button>
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword"
+            [(ngModel)]="searchValue" />
+        </span>
+      </div>
+    </ng-template>
+    <!-- ... -->
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Fecha
+            <p-columnFilter type="date" field="fecha" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 5px; width: 14%;">
+          <div class="flex align-items-center">
+            Descripcion
+            <p-columnFilter type="text" field="descripcion" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Precio
+            <p-columnFilter type="numeric" field="precio" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Cantidad
+            <p-columnFilter type="numeric" field="email" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Total
+            <p-columnFilter type="text" field="total" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Tipo de pago
+            <p-columnFilter type="text" field="contacto" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Observaciones
+            <p-columnFilter type="date" field="fechaRegistro" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Acciones
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+
+    <!-- ... -->
+
+
+    <ng-template pTemplate="body" let-cliente>
+      <tr>
+        <td>
+          <span class="ml-1 vertical-align-middle"> 08-10-24 </span>
+        </td>
+        <td>
+          <span class="ml-1 vertical-align-middle"> Ajuste </span>
+        </td>
+        <td>
+          $300
+        </td>
+        <td>
+          1
+        </td>
+        <td>
+          $300
+        </td>
+        <td>
+          Efectivo
+        </td>
+        <td>
+          AGREGO BKT 15J 45J  TUBO 1
+        </td>
+        <td class="opciones">
+
+          <button pTooltip="Borrar" tooltipPosition="top" (click)="borrarConfirm($event)">
+            <img src="assets/images/borrar.png" alt="editar icono">
+          </button>
+
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7">No se encontraron Pacientes
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-toast></p-toast>
+  <p-confirmDialog></p-confirmDialog>
+
+
+</div>
