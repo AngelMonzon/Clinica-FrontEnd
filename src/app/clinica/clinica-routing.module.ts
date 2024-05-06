@@ -9,11 +9,13 @@ import { TratamientoComponent } from './pages/tratamiento/tratamiento.component'
 import { PrescripcionComponent } from './pages/prescripcion/prescripcion.component';
 import { IngresosGastosComponent } from './pages/ingresos-gastos/ingresos-gastos.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'administracion', component: AdministracionComponent},
       { path: 'control-citas', component: ControlCitasComponent},

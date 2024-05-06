@@ -1,5 +1,12 @@
-<button class="menu"><img src="assets/images/menu.png" alt=""></button>
+<button class="menu"><img src="assets/images/menu.png" (click)="sidebarVisible = true" alt=""></button>
 
 <img src="assets/images/clinica-dental.png" alt="clinica-dental" class="logo">
 
 <h1>Nombre de la clinica</h1>
+
+<button class="cerrar-sesion" (click)="logout()"><img src="assets/images/cerrar-sesion.png" alt=""></button>
+
+<p-sidebar [(visible)]="sidebarVisible" position="left"
+[style]="{'background-color': '#3b5998'}" (blockScroll)="true">
+  <app-sidebar></app-sidebar>
+</p-sidebar>

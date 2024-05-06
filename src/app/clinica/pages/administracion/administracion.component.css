@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+app-configuracion-clinica, app-logotipo {
+  flex: 1;
+  height: 100%;
+  padding: 50px;
+  box-sizing: border-box;
+}

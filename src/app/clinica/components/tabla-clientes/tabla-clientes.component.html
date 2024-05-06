@@ -11,7 +11,7 @@
         <span class="p-input-icon-left ml-auto">
           <i class="pi pi-search"></i>
           <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword"
-            [(ngModel)]="searchValue" />
+            [(ngModel)]="searchValue"  class="search"/>
         </span>
       </div>
     </ng-template>
@@ -36,7 +36,7 @@
             <p-columnFilter type="text" field="nombre" display="menu"></p-columnFilter>
           </div>
         </th>
-        <th style="max-width: 5px; width: 14%;">
+        <th style="min-width: 50px; width: 14%;">
           <div class="flex align-items-center">
             Edad
             <p-columnFilter type="numeric" field="edad" display="menu"></p-columnFilter>

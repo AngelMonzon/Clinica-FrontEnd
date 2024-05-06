@@ -1,0 +1,31 @@
+.container {
+  display: block;
+  width: 100%;
+}
+
+.container h1 {
+  color: gray;
+}
+
+.item {
+  width: 100%;
+}
+
+.item button {
+  margin-right: 1.5%;
+}
+
+.item label {
+  display: inline-block;
+  width: 40%;
+  min-width: 40%;
+  margin: 20px 1%;
+  font-weight: 300;
+}
+
+.item input {
+  display: inline-block;
+  width: 55%;
+  min-width: 40%;
+  margin: 20px 1%;
+}

@@ -25,3 +25,10 @@
 .opciones button img {
   width: 100%;
 }
+
+@media screen and (max-width: 500px) {
+  .search {
+    width: 50px;
+    display: none;
+  }
+}

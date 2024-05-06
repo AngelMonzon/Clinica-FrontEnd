@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>Datos de la clinica</h1>
+  <form action="" [formGroup]="formulario" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="nombre-clinica item">
+      <label for="nombre-clinica">Nombre Clinica</label>
+      <input type="text" id="nombre-clinica" pInputText formControlName="nombreClinica"/>
+    </div>
+
+    <div class="telefono item">
+      <label for="telefono">Telefono</label>
+      <input type="text" id="telefono" pInputText formControlName="telefono"/>
+    </div>
+
+    <div class="direccion item">
+      <label for="direccion">Direccion</label>
+      <input type="text" id="direccion" pInputText formControlName="direccion"/>
+    </div>
+
+    <div class="encabezado-informe item">
+      <label for="encabezado-informe">Encabezado del informe</label>
+      <input type="text" id="encabezado-informe" pInputText formControlName="encabezadoInforme"/>
+    </div>
+
+    <div class="item flex justify-content-end">
+      <button pButton type="submit">Guardar</button>
+    </div>
+  </form>
+</div>
+
+<p-toast></p-toast>

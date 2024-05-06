@@ -27,6 +27,10 @@ import { EditarClienteComponent } from './components/editar-cliente/editar-clien
 import { RegistroPacienteComponent } from './components/registro-cliente/registro-paciente.component';
 import { TablaPacienteComponent } from './components/tabla-paciente/tabla-paciente.component';
 import { AnadirRegistroComponent } from './components/anadir-registro/anadir-registro.component';
+import { ConfiguracionClinicaComponent } from './components/configuracion-clinica/configuracion-clinica.component';
+import { LogotipoComponent } from './components/logotipo/logotipo.component';
+import { AuthGuard } from '../guards/auth.guard';
+import { RegistroDoctorComponent } from './components/registro-doctor/registro-doctor.component';
 
 
 
@@ -50,6 +54,10 @@ import { AnadirRegistroComponent } from './components/anadir-registro/anadir-reg
     RegistroPacienteComponent,
     TablaPacienteComponent,
     AnadirRegistroComponent,
+    ConfiguracionClinicaComponent,
+    LogotipoComponent,
+    RegistroDoctorComponent,
+
   ],
   imports: [
     CommonModule,
@@ -58,8 +66,7 @@ import { AnadirRegistroComponent } from './components/anadir-registro/anadir-reg
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-
   ],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService, AuthGuard]
 })
 export class ClinicaModule { }

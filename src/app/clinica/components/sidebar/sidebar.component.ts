@@ -12,8 +12,16 @@ export class SidebarComponent {
       link: "pacientes"
     },
     {
+      titulo: "Control de Citas",
+      link: "control-citas"
+    },
+    {
       titulo: "Doctor",
       link: "doctor"
+    },
+    {
+      titulo: "Ingresos y Gastos",
+      link: "ingresos-gastos"
     },
     {
       titulo: "Farmacia",
@@ -28,16 +36,8 @@ export class SidebarComponent {
       link: "prescripcion"
     },
     {
-      titulo: "Ingresos y Gastos",
-      link: "ingresos-gastos"
-    },
-    {
       titulo: "Administracion",
       link: "administracion"
-    },
-    {
-      titulo: "Control de Citas",
-      link: "control-citas"
     },
 
   ]

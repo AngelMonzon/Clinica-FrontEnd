@@ -25,7 +25,9 @@ import { AccordionModule } from 'primeng/accordion';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FloatLabelModule } from 'primeng/floatlabel';
-
+import { SidebarModule } from 'primeng/sidebar';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ImageModule } from 'primeng/image';
 
 
 
@@ -56,6 +58,9 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     CheckboxModule,
     SelectButtonModule,
     FloatLabelModule,
+    SidebarModule,
+    FileUploadModule,
+    ImageModule,
 
 
   ]

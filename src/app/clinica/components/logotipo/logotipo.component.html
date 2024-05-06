@@ -1,0 +1,26 @@
+<p-fileUpload
+  name="file"
+  url="http://127.0.0.1:8050/api/upload"
+  [multiple]="false"
+  accept="image/*"
+  maxFileSize="10000000000"
+  (onSelect)="handleSelect($event)"
+  (onUpload)="handleUpload($event)">
+  <ng-template pTemplate="toolbar">
+    <div class="py-3">Subir logotipo</div>
+  </ng-template>
+  <ng-template let-file pTemplate="file">
+    <div>{{ file.name }}</div>
+  </ng-template>
+  <ng-template pTemplate="content" let-files class="h-1rem">
+    <div class="logotipo">
+      <p-image [src]="selectedImage"
+      [style]="{height: '100%', padding: '15px'}"
+      [imageStyle]="{width: 'auto', height: '100%'}" [preview]="true">
+    </p-image>
+    </div>
+  </ng-template>
+</p-fileUpload>
+
+
+<p-toast></p-toast>

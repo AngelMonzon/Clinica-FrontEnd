@@ -1,0 +1,77 @@
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.arriba {
+  display: flex;
+  justify-content: space-between;
+  height: 15%;
+  align-items: center;
+}
+
+.arriba button {
+  background-color: 	#3b5998;
+  border-color: #3b5998;
+  padding: 10px 25px;
+
+  height: 50px;
+  margin-top: 15px;
+  margin-right: 15px;
+  margin-bottom: 30px;
+}
+
+.arriba button img {
+  height: 15px;
+  margin-right: 5px;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-bottom: 30px;
+}
+
+.imagen {
+  width: 50px; /* Ancho de tu contenedor */
+  height: 50px; /* Altura de tu contenedor */
+  border-radius: 50%; /* Hace que el contenedor sea redondo */
+  overflow: hidden; /* Oculta el contenido que sobresale del contenedor */
+  position: absolute;
+  border: 2px solid #3b5998;
+}
+
+.imagen img {
+  width: 100%; /* Ajusta el ancho de la imagen al contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  display: block; /* Elimina los márgenes inferiores que a veces aparecen */
+}
+
+.nombre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 45px;
+  background-color:#dfe3ee;
+  border-radius: 20px;
+  font-weight: 900;
+}
+
+
+/* Tabla */
+
+.tabla {
+  height: 85%;
+}
+
+
+
+@media screen and (max-width: 1200px) {
+
+}

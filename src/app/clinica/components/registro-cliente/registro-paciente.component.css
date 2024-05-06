@@ -80,3 +80,27 @@
 .custom-select option {
   padding: 8px 12px;
 }
+
+@media screen and (max-width: 1200px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .antecedentes-container-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .antecedentes-container-down {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .antecedentes-container-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
