@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientesService } from '../../services/clientes.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { NuevoClienteComponent } from '../../components/nuevo-cliente/nuevo-cliente.component';
-import { Cliente } from '../../interfaces/cliente';
 import { ClienteComunicacionService } from '../../services/ClienteComunicacionService.service';
 import { MessageService } from 'primeng/api';
+import { NuevoMedicoComponent } from '../../components/nuevo-medico/nuevo-medico.component';
+import { NuevoClienteComponent } from '../../components/nuevo-cliente/nuevo-cliente.component';
 
 @Component({
   selector: 'app-pacientes',

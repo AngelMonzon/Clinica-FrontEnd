@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ClinicaService } from '../../services/clinica.service';
-import { DatosClinica } from '../../interfaces/datosClinica.interface';
 import { MessageService } from 'primeng/api';
+import { Clinica } from '../../interfaces/clinica.interface';
 
 @Component({
   selector: 'app-configuracion-clinica',
@@ -14,7 +14,7 @@ export class ConfiguracionClinicaComponent implements OnInit {
   // Formularios
   formulario!: FormGroup;
 
-  clinica!: DatosClinica;
+  clinica!: Clinica;
 
   constructor(
     private fb: FormBuilder,

@@ -6,11 +6,11 @@
     styleClass="p-datatable-striped" [style]="{'padding': 'px'}">
     <ng-template pTemplate="caption" style="height: 5px;">
       <div class="flex" style="height: 50%;">
-        <button pButton label="Clear" class="p-button-outlined h-full" icon="pi pi-filter-slash"
+        <button pButton label="Borrar Filtros" class="p-button-outlined h-full" icon="pi pi-filter-slash"
           (click)="clear(dt1)"></button>
         <span class="p-input-icon-left ml-auto">
           <i class="pi pi-search"></i>
-          <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword"
+          <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Buscar"
             [(ngModel)]="searchValue"  class="search"/>
         </span>
       </div>
@@ -39,7 +39,7 @@
         <th style="min-width: 50px; width: 14%;">
           <div class="flex align-items-center">
             Edad
-            <p-columnFilter type="numeric" field="edad" display="menu"></p-columnFilter>
+            <p-columnFilter type="text" field="edad" display="menu"></p-columnFilter>
           </div>
         </th>
         <th style="max-width: 14%; width: 14%;">

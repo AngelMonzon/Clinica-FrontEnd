@@ -1,0 +1,43 @@
+.card {
+  height: 100%;
+}
+
+.boton-contacto {
+  background-color: #8b9dc3;
+  padding: 5px 10px;
+  border: none;
+  font-size: .8rem;
+}
+
+.opciones {
+  width: 100%;
+  height: 100%;
+}
+
+.opciones button {
+  height: 20px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.opciones button:hover {
+  cursor: pointer;
+}
+
+.opciones button:active {
+  transform: scale(1.1, 1.1);
+}
+
+.opciones button img {
+  height: 100%;
+}
+
+
+@media screen and (max-width: 500px) {
+  .search {
+    width: 200px;
+  }
+}

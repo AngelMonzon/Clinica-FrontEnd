@@ -1,0 +1,49 @@
+<div class="form-container mt-8">
+
+  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <!-- Nombre -->
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" formControlName="nombre" required pInputText>
+      <div *ngIf="clienteForm.get('nombre')?.touched && clienteForm.get('nombre')?.hasError('required')"
+            class="label-danger">
+        <p>El nombre es obligatorio.</p>
+      </div>
+      <div *ngIf="clienteForm.get('nombre')?.touched && clienteForm.get('nombre')?.hasError('pattern')"
+            class="label-danger">
+        <p>El nombre debe tener al menos 3 letras.</p>
+      </div>
+    </div>
+
+    <!-- Especialidad -->
+    <div class="form-group">
+      <label for="especialidad">Especialidad:</label>
+      <input type="text" id="especialidad" formControlName="especialidad" pInputText>
+    </div>
+
+    <!-- Direccion -->
+    <div class="form-group">
+      <label for="direccion">Direccion:</label>
+      <input type="text" id="direccion" formControlName="direccion" pInputText>
+    </div>
+
+    <!-- Telefono -->
+    <div class="form-group">
+      <label for="telefono">Telefono:</label>
+      <input type="text" id="telefono" formControlName="telefono" pInputText>
+    </div>
+
+    <div class="form-group mt-8">
+      <span class="p-float-label">
+        <p-calendar formControlName="fechaInicio" inputId="fechaInicio"></p-calendar>
+        <label for="fechaRegistro">Fecha de Inicio</label>
+        </span>
+    </div>
+
+
+    <button class="submit-boton" type="submit"
+    [disabled]="clienteForm.invalid" pButton>Crear Paciente</button>
+
+  </form>
+</div>

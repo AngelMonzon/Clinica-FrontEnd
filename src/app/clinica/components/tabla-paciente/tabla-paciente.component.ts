@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { Cliente } from '../../interfaces/cliente';
 import { ClientesService } from '../../services/clientes.service';
 import { Table } from 'primeng/table';
@@ -7,6 +7,8 @@ import { NuevoClienteComponent } from '../nuevo-cliente/nuevo-cliente.component'
 import { EditarClienteComponent } from '../editar-cliente/editar-cliente.component';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 import { RegistroPacienteComponent } from '../registro-cliente/registro-paciente.component';
+import { Historial } from '../../interfaces/historial.interface';
+import { HistorialService } from '../../services/HistorialService.service';
 
 
 @Component({
@@ -16,6 +18,10 @@ import { RegistroPacienteComponent } from '../registro-cliente/registro-paciente
   providers: [MessageService]
 })
 export class TablaPacienteComponent {
+
+  @Input()
+  pacienteId!: number;
+
   //Referencia al cuadro de dialogo que se abrira
   ref: DynamicDialogRef | undefined;
 
@@ -23,7 +29,7 @@ export class TablaPacienteComponent {
 
   searchValue: string = '';
 
-  clientes!: Cliente[];
+  historial!: Historial[];
 
   loading: boolean = true;
 
@@ -35,20 +41,19 @@ export class TablaPacienteComponent {
 
 
   constructor(
-    private clientesService: ClientesService,
+    private historialService: HistorialService,
     private messageService: MessageService,
     public dialogService: DialogService,
     private confirmationService: ConfirmationService,
     ) { }
 
   ngOnInit() {
-    // Rellenar variable clientes con los datos de la api
-    this.clientesService.getClientes().subscribe((clientes) => {
-      this.clientes = clientes;
+    // Rellenar variable historial con los datos de la api
+    this.historialService.getHistorialPorId(this.pacienteId).subscribe((historial) => {
+      this.historial = historial;
       this.loading = false;
 
-      this.clientes.forEach((cliente) => (cliente.fechaRegistro = new Date(<Date>cliente.fechaRegistro)));
-      console.log(clientes)
+      this.historial.forEach((historial) => (historial.fecha = new Date(<Date>historial.fecha)));
     });
 
     //Tamanos de la tabla
@@ -114,7 +119,7 @@ export class TablaPacienteComponent {
 
   //Dialogo de confirmacion
 
-  borrarConfirm(event: Event) {
+  borrarConfirm(event: Event, historial: Historial) {
       this.confirmationService.confirm({
           target: event.target as EventTarget,
           message: 'Se borrara permanentemente este archivo',
@@ -126,11 +131,26 @@ export class TablaPacienteComponent {
           rejectIcon:"none",
 
           accept: () => {
-              this.messageService.add({ severity: 'info', summary: 'Confirmacion', detail: 'Paciente Eliminado' });
+              this.historialService.eliminarHistorial(historial.idTrabajo).subscribe(
+                borrar => {
+                  this.actualizarTabla();
+                  this.messageService.add({ severity: 'info', summary: 'Confirmacion', detail: 'Paciente Eliminado' });
+                }
+              )
           },
           reject: () => {
               this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'Operacion Cancelada' });
           }
       });
+  }
+
+  actualizarTabla() {
+    this.loading = true;
+    this.historialService.getHistorialPorId(this.pacienteId).subscribe((historial) => {
+      this.historial = historial;
+      this.loading = false;
+      this.historial.forEach((historial) => (historial.fecha = new Date(<Date>historial.fecha)));
+    });
+
   }
 }

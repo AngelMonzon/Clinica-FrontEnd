@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientesService } from '../../services/clientes.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { NuevoClienteComponent } from '../../components/nuevo-cliente/nuevo-cliente.component';
-import { Cliente } from '../../interfaces/cliente';
 import { ClienteComunicacionService } from '../../services/ClienteComunicacionService.service';
 import { MessageService } from 'primeng/api';
+import { NuevoMedicoComponent } from '../../components/nuevo-medico/nuevo-medico.component';
 
 @Component({
   selector: 'app-doctor',
@@ -43,9 +42,10 @@ export class DoctorComponent {
   }
 
   showNew() {
-    this.ref = this.dialogService.open(NuevoClienteComponent, {
-      header: 'Agregar Paciente',
+    this.ref = this.dialogService.open(NuevoMedicoComponent, {
+      header: 'Agregar Doctor',
       width: '30vw',
+      height: '85vh',
       modal: true,
       breakpoints: {
         '960px': '75vw',

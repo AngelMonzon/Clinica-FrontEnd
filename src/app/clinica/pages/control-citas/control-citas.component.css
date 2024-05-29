@@ -1,0 +1,127 @@
+:host {
+  display: block;
+  /* Establecer un alto máximo para el div */
+  max-height: 90vh; /* Por ejemplo, 300px */
+
+  /* Hacer que el contenido se desborde y sea scrollable */
+  overflow-y: auto; /* Agregar un scroll vertical si es necesario */
+}
+
+.up {
+  box-sizing: border-box;
+
+}
+
+.btnPrimero {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.btnSegundo {
+  border-radius: 0;
+}
+
+.btnTercero {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.form-container {
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+/* Estilos para la tabla */
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: .1px solid #dee2e6;
+}
+
+.table-bordered thead th,
+.table-bordered thead td {
+  border-bottom-width: 2px;
+}
+
+/* Opcional: Estilos adicionales para mejorar la apariencia */
+.table-bordered th,
+.table-bordered td {
+  padding: 0.75rem;
+  vertical-align: top;
+  margin: 0;
+}
+
+.table-bordered thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table-bordered tbody + tbody {
+  border-top: 2px solid #dee2e6;
+}
+
+
+th {
+  text-align: start;
+}
+
+
+/* Boton Crear cita */
+.boton-redondo {
+  position: absolute;
+  bottom: 5px;
+  right: 20px;
+  width: 100px;
+  height: 100px;
+  background-color: transparent;
+  border: none;
+}
+
+.boton-redondo:hover {
+  cursor: pointer;
+  transform: scale(1.1, 1.1);
+}
+
+.boton-redondo img {
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Agrega una sombra para un efecto tridimensional */
+  border: none;
+  border-radius: 50%;
+}
+
+/* Clase para boton de nueva cita */
+.visible {
+  visibility: hidden;
+}
+
+/* select */
+
+.custom-select {
+  width: 100%;
+  height: 100%;
+  padding: 12px 12px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  appearance: none;
+  background-color: #fff;
+  background-image: none;
+  cursor: pointer;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: #66afe9;
+  box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
+}
+
+.custom-select::-ms-expand {
+  display: none;
+}
+
+.custom-select option {
+  padding: 8px 12px;
+}

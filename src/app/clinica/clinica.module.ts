@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmationService } from 'primeng/api';
@@ -31,6 +31,19 @@ import { ConfiguracionClinicaComponent } from './components/configuracion-clinic
 import { LogotipoComponent } from './components/logotipo/logotipo.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { RegistroDoctorComponent } from './components/registro-doctor/registro-doctor.component';
+import { TablaDoctorComponent } from './components/tabla-doctor/tabla-doctor.component';
+import { NuevoMedicoComponent } from './components/nuevo-medico/nuevo-medico.component';
+import { NuevoProductoComponent } from './components/nuevo-producto/nuevo-producto.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { EditarCitasComponent } from './components/editar-citas/editar-citas.component';
+
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { RayosXComponent } from './components/rayos-x/rayos-x.component';
+
 
 
 
@@ -57,6 +70,11 @@ import { RegistroDoctorComponent } from './components/registro-doctor/registro-d
     ConfiguracionClinicaComponent,
     LogotipoComponent,
     RegistroDoctorComponent,
+    TablaDoctorComponent,
+    NuevoMedicoComponent,
+    NuevoProductoComponent,
+    EditarCitasComponent,
+    RayosXComponent,
 
   ],
   imports: [
@@ -66,7 +84,17 @@ import { RegistroDoctorComponent } from './components/registro-doctor/registro-d
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    NgbModalModule,
+    PdfViewerModule,
+    NgxExtendedPdfViewerModule,
+
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [ConfirmationService, AuthGuard]
 })
 export class ClinicaModule { }

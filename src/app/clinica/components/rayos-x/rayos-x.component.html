@@ -1,0 +1,44 @@
+<p-fileUpload [ngStyle]="{
+      'height': '20%',
+    }" name="file" [url]="'http://127.0.0.1:8050/api/upload/rayosX/' + idPaciente"  (onUpload)="handleUpload($event)"
+  [multiple]="true" accept="application/pdf" maxFileSize="100000000">
+  <ng-template pTemplate="content">
+    <ul *ngIf="uploadedFiles.length">
+      <li *ngFor="let file of uploadedFiles">
+        {{ file.name }} - {{ file.size }} bytes
+      </li>
+    </ul>
+  </ng-template>
+</p-fileUpload>
+
+<button pButton (click)="borrarVisible = true"
+        severity="danger" class="boton-eliminar"
+        *ngIf="!borrarVisible">Eliminar</button>
+<button pButton (click)="borrarVisible = false"
+        class="boton-eliminar"
+        *ngIf="borrarVisible">Cancelar</button>
+
+<div class="flex justify-content-center p-3 gap-5 flex-wrap">
+  <div *ngFor="let link of nombreArchivos" class="pdf-container">
+    <pdf-viewer
+  (mwlClick)="mostrarRayosX(link)"
+    class="pdf"
+    [src]="'http://localhost:8050/uploads/rayosx/'+ idPaciente + '/' + link"
+    [render-text]="true"
+    [original-size]="false"
+    style="width: 300px; height: 300px; border: 1px solid #ccc; box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);">
+  </pdf-viewer>
+
+  <img src="assets/images/borrar-calidad.png" alt="borrar"
+       class="borrar-pdf" *ngIf="borrarVisible"
+       (click)="borrarPdf(link, $event)">
+  </div>
+</div>
+
+
+<p-dialog header="Header" [(visible)]="visible" [style]="{ width: '85vw', height: '98vh' }">
+  <pdf-viewer [src]="pdfSeleccionado" [render-text]="true" [original-size]="false" style="height: 65vh"></pdf-viewer>
+</p-dialog>
+
+<p-toast/>
+<p-confirmDialog></p-confirmDialog>

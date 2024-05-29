@@ -28,6 +28,8 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { SidebarModule } from 'primeng/sidebar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
+import { ScrollTopModule } from 'primeng/scrolltop';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 
 
@@ -61,6 +63,8 @@ import { ImageModule } from 'primeng/image';
     SidebarModule,
     FileUploadModule,
     ImageModule,
+    ScrollTopModule,
+    ConfirmPopupModule,
 
 
   ]

@@ -1,11 +1,14 @@
 import { Component, Inject, Input } from '@angular/core';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Cliente } from '../../interfaces/cliente';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PacientesService } from '../../services/pacientes.service';
 import { Paciente } from '../../interfaces/paciente';
 import { DatePipe } from '@angular/common';
 import { MessageService } from 'primeng/api';
+import { Medico } from '../../interfaces/medico';
+import { MedicoService } from '../../services/medico.service';
+import { RayosXComponent } from '../rayos-x/rayos-x.component';
 
 @Component({
   selector: 'app-registro-cliente',
@@ -20,7 +23,16 @@ export class RegistroPacienteComponent {
 
   paciente!: Paciente;
 
+  medicos!: Medico[];
+
   pacienteExiste: boolean = false;
+
+  //Componente rayosX
+  rayosXKey = 1;
+
+  refreshRayosXComponent() {
+    this.rayosXKey++;
+  }
 
   // Formularios
   formulario!: FormGroup;
@@ -31,7 +43,6 @@ export class RegistroPacienteComponent {
   stateOptions: any[] = [{ label: 'Off', value: false }, { label: 'On', value: true }];
 
   editar: boolean = true;
-
 
   activeIndex: number | number[] = 0;
 
@@ -73,10 +84,20 @@ export class RegistroPacienteComponent {
     private pacientesService: PacientesService,
     private datePipe: DatePipe,
     private messageService: MessageService,
+    private medicoService: MedicoService,
+    public dialogService: DialogService,
   ) {
     this.cliente = this.config.data;
 
     this.initFormulario();
+
+    this.medicoService.getMedicos().subscribe(
+      medicos => {
+        this.medicos = medicos;
+
+        console.log(this.medicos);
+      }
+    )
 
     this.pacientesService.getPaciente(this.cliente.id).subscribe(
       (paciente) => {
@@ -128,9 +149,6 @@ export class RegistroPacienteComponent {
 
       }
     );
-
-
-
 }
 
 ngOnInit() {
@@ -277,12 +295,13 @@ private agregarPaciente(paciente: Paciente): void {
   this.pacientesService.agregarPaciente(paciente).subscribe(
     (pacienteAgregado) => {
       console.log('Paciente agregado:', pacienteAgregado);
-      // Mostrar notificación o redirigir a otra página
+      this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Paciente agregado correctamente' });
+      // Puedes mostrar una notificación de éxito o redirigir a otra página
     },
     (error) => {
-      console.error('Errror al agregar el paciente:', error);
-      console.log(paciente);
-
+      console.error('Error al agregar el paciente:', error);
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo agregar el paciente' });
+      // Puedes mostrar una notificación de error o manejar el error de otra manera
     }
   );
 }
@@ -320,6 +339,19 @@ private agregarPaciente(paciente: Paciente): void {
    fechaRegistro: new Date,
  };
 
+ show() {
+  this.ref = this.dialogService.open(RayosXComponent, {
+      header: 'Rayos X de Paciente',
+      width: '80vw',
+      height: '100vh',
+      modal:true,
+      breakpoints: {
+          '960px': '90vw',
+          '640px': '90vw'
+      },
+      data: { idPaciente: this.paciente.id }
+  });
 
+ }
 
 }

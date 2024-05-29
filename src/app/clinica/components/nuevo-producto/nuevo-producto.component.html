@@ -1,0 +1,47 @@
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+  <div class="grid-container">
+    <div class="grid-item">
+      <label for="id">Id:</label>
+      <input type="text" formControlName="id">
+    </div>
+    <div class="grid-item">
+      <label for="nombreProducto">Nombre del Producto:</label>
+      <input type="text" formControlName="nombreProducto">
+    </div>
+    <div class="grid-item">
+      <label for="nombreGenerico">Nombre Genérico:</label>
+      <input type="text" formControlName="nombreGenerico">
+    </div>
+    <div class="grid-item">
+      <label for="categoria">Categoría:</label>
+      <select formControlName="categoria">
+        <!-- Opciones de la categoría -->
+      </select>
+    </div>
+    <div class="grid-item">
+      <label for="fechaManufactura">Fecha de Manufactura:</label>
+      <input type="date" formControlName="fechaManufactura">
+    </div>
+    <div class="grid-item">
+      <label for="fechaExpiracion">Fecha de Expiración:</label>
+      <input type="date" formControlName="fechaExpiracion">
+    </div>
+    <div class="grid-item">
+      <label for="codigoBarra">Código de Barra:</label>
+      <input type="text" formControlName="codigoBarra">
+    </div>
+    <div class="grid-item">
+      <label for="cantidad">Cantidad:</label>
+      <input type="number" formControlName="cantidad">
+    </div>
+    <div class="grid-item">
+      <label for="precioCompra">Precio de Compra:</label>
+      <input type="number" formControlName="precioCompra">
+    </div>
+    <div class="grid-item">
+      <label for="precioVenta">Precio de Venta:</label>
+      <input type="number" formControlName="precioVenta">
+    </div>
+  </div>
+  <button type="submit">Enviar</button>
+</form>

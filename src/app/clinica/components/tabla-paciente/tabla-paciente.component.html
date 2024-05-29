@@ -1,18 +1,18 @@
-<app-anadir-registro></app-anadir-registro>
+<app-anadir-registro [pacienteId]="pacienteId"></app-anadir-registro>
 
 <div class="card">
-  <p-table #dt1 [value]="clientes" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+  <p-table #dt1 [value]="historial" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[5, 10, 25]" [loading]="loading" [paginator]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [globalFilterFields]="['id','nombre','edad', 'genero','contacto']" [styleClass]="selectedSize"
+    [globalFilterFields]="['id','fecha','descripcion', 'precio','total', 'observaciones', 'tipoDePago']" [styleClass]="selectedSize"
     styleClass="p-datatable-striped" [style]="{'padding': 'px'}">
     <ng-template pTemplate="caption" style="height: 5px;">
       <div class="flex" style="height: 50%;">
-        <button pButton label="Clear" class="p-button-outlined h-full" icon="pi pi-filter-slash"
+        <button pButton label="Borrar Filtros" class="p-button-outlined h-full" icon="pi pi-filter-slash"
           (click)="clear(dt1)"></button>
         <span class="p-input-icon-left ml-auto">
           <i class="pi pi-search"></i>
-          <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword"
+          <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Buscar"
             [(ngModel)]="searchValue" class="search"/>
         </span>
       </div>
@@ -36,13 +36,13 @@
         <th style="max-width: 14%; width: 14%;">
           <div class="flex align-items-center">
             Precio
-            <p-columnFilter type="numeric" field="precio" display="menu"></p-columnFilter>
+            <p-columnFilter type="text" field="precio" display="menu"></p-columnFilter>
           </div>
         </th>
         <th style="max-width: 14%; width: 14%;">
           <div class="flex align-items-center">
             Cantidad
-            <p-columnFilter type="numeric" field="email" display="menu"></p-columnFilter>
+            <p-columnFilter type="text" field="cantidad" display="menu"></p-columnFilter>
           </div>
         </th>
         <th style="max-width: 14%; width: 14%;">
@@ -54,13 +54,13 @@
         <th style="max-width: 14%; width: 14%;">
           <div class="flex align-items-center">
             Tipo de pago
-            <p-columnFilter type="text" field="contacto" display="menu"></p-columnFilter>
+            <p-columnFilter type="text" field="tipoDePago" display="menu"></p-columnFilter>
           </div>
         </th>
         <th style="max-width: 14%; width: 14%;">
           <div class="flex align-items-center">
             Observaciones
-            <p-columnFilter type="date" field="fechaRegistro" display="menu"></p-columnFilter>
+            <p-columnFilter type="text" field="observaciones" display="menu"></p-columnFilter>
           </div>
         </th>
         <th style="max-width: 14%; width: 14%;">
@@ -74,32 +74,32 @@
     <!-- ... -->
 
 
-    <ng-template pTemplate="body" let-cliente>
+    <ng-template pTemplate="body" let-historial>
       <tr>
         <td>
-          <span class="ml-1 vertical-align-middle"> 08-10-24 </span>
+          <span class="ml-1 vertical-align-middle">{{ historial.fecha | date: 'dd-MM-yyyy' }} </span>
         </td>
         <td>
-          <span class="ml-1 vertical-align-middle"> Ajuste </span>
+          <span class="ml-1 vertical-align-middle"> {{ historial.descripcion }} </span>
         </td>
         <td>
-          $300
+          {{ historial.precio }}
         </td>
         <td>
-          1
+          {{ historial.cantidad }}
         </td>
         <td>
-          $300
+          {{ historial.total }}
         </td>
         <td>
-          Efectivo
+          {{ historial.tipoDePago }}
         </td>
         <td>
-          AGREGO BKT 15J 45J  TUBO 1
+          {{ historial.observaciones }}
         </td>
         <td class="opciones">
 
-          <button pTooltip="Borrar" tooltipPosition="top" (click)="borrarConfirm($event)">
+          <button pTooltip="Borrar" tooltipPosition="top" (click)="borrarConfirm($event, historial)">
             <img src="assets/images/borrar.png" alt="editar icono">
           </button>
 

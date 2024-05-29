@@ -66,21 +66,8 @@ export class TablaClientesComponent {
       this.clientesService.getClientes().subscribe((clientes) => {
         this.clientes = clientes;
         this.loading = false;
-      });
-
-      this.clientes.forEach((cliente) => (cliente.fechaRegistro = new Date(<Date>cliente.fechaRegistro)));
-
-    });
-
-    //Se ejecutara si se agrega un nuevo cliente
-    this.clienteComunicacionService.clienteAgregado$.subscribe(() => {
-      this.loading = true;
-      this.clientesService.getClientes().subscribe((clientes) => {
-        this.clientes = clientes;
-        this.loading = false;
         this.clientes.forEach((cliente) => (cliente.fechaRegistro = new Date(<Date>cliente.fechaRegistro)));
       });
-
 
     });
 

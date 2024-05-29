@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
-import { DatosClinica } from '../interfaces/datosClinica.interface';
+import { Clinica } from '../interfaces/clinica.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,23 +13,23 @@ export class ClinicaService {
   private baseUrl: string = "http://127.0.0.1:8050/api/clinica";
 
   obtenerDatosClinica() {
-    return this.http.get<any>(`${this.baseUrl}/obtener`);
+    return this.http.get<Clinica>(`${this.baseUrl}/obtener`);
   }
 
-  obtenerDatosClinicaPorId(id: number): Observable<DatosClinica> {
+  obtenerDatosClinicaPorId(id: number): Observable<Clinica> {
     const url = `${this.baseUrl}/obtener/${id}`;
-    return this.http.get<DatosClinica>(url);
+    return this.http.get<Clinica>(url);
   }
 
-  agregarDatosClinica(datosClinica: any) {
-    return this.http.post<any>(`${this.baseUrl}/agregar`, datosClinica);
+  agregarDatosClinica(datosClinica: Clinica) {
+    return this.http.post<Clinica>(`${this.baseUrl}/agregar`, datosClinica);
   }
 
-  actualizarDatosClinica(id: number, datosClinica: any) {
-    return this.http.put<any>(`${this.baseUrl}/actualizar/${id}`, datosClinica);
+  actualizarDatosClinica(id: number, datosClinica: Clinica) {
+    return this.http.put<Clinica>(`${this.baseUrl}/actualizar/${id}`, datosClinica);
   }
 
   eliminarDatosClinica(id: number) {
-    return this.http.delete<any>(`${this.baseUrl}/eliminar/${id}`);
+    return this.http.delete<Clinica>(`${this.baseUrl}/eliminar/${id}`);
   }
 }

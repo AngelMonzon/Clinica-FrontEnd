@@ -1,17 +1,57 @@
 <div class="card">
-  <p-floatLabel *ngFor="let input of inputs" class="float-label">
-    <input [id]="input" type="text" pInputText/>
-    <label [for]="input"> {{ input }} </label>
-  </p-floatLabel>
-
-  <div>
-    <p-floatLabel class="observaciones">
-      <input id="observaciones" type="text" pInputText/>
-      <label for="observaciones">Observaciones</label>
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <p-floatLabel class="float-label">
+      <p-calendar appendTo="body" id="fecha" formControlName="fechaRegistro" inputId="fecha"></p-calendar>
+      <label for="fecha">Fecha</label>
     </p-floatLabel>
 
-    <button pButton type="submit">Guardar</button>
-  </div>
+    <!-- Descripcion -->
+    <p-floatLabel class="float-label">
+      <input id="descripcion" type="text" pInputText
+             formControlName="descripcion"/>
+      <label for="descripcion"> Descripcion </label>
+    </p-floatLabel>
 
+    <!-- Precio -->
+    <p-floatLabel class="float-label">
+      <input id="precio" type="text" pInputText
+             formControlName="precio" (ngModelChange)="onPayChange($event)"/>
+      <label for="precio"> Precio </label>
+    </p-floatLabel>
 
+    <!-- Cantidad -->
+    <p-floatLabel class="float-label">
+      <input id="cantidad" type="text" pInputText
+             formControlName="cantidad" (ngModelChange)="onQuantyChange($event)"/>
+      <label for="cantidad"> Cantidad </label>
+    </p-floatLabel>
+
+    <!-- Total -->
+    <p-floatLabel class="float-label">
+      <input id="total" type="text" pInputText
+             formControlName="total"/>
+      <label for="total"> Total </label>
+    </p-floatLabel>
+
+    <!-- Tipo de pago -->
+    <p-floatLabel class="float-label">
+      <select formControlName="tipoPago" class="custom-select" aria-placeholder="Tipo De Pago">
+        <option *ngFor="let tipo of tiposPago" [value]="tipo">
+          {{ tipo }}
+        </option>
+      </select>
+    </p-floatLabel>
+
+    <!-- Observaciones -->
+    <div>
+      <p-floatLabel class="observaciones">
+        <input id="observaciones" type="text" pInputText formControlName="observaciones"/>
+        <label for="observaciones">Observaciones</label>
+      </p-floatLabel>
+
+      <button pButton type="submit">Guardar</button>
+
+      <button pButton type="button" (click)="clear()">Limpiar</button>
+    </div>
+  </form>
 </div>
