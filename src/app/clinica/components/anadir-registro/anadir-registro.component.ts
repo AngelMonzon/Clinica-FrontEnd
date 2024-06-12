@@ -2,11 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Historial } from '../../interfaces/historial.interface';
 import { HistorialService } from '../../services/HistorialService.service';
+import { HistorialComunicationService } from '../../services/HistorialComunication.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-anadir-registro',
   templateUrl: './anadir-registro.component.html',
-  styleUrls: ['./anadir-registro.component.css']
+  styleUrls: ['./anadir-registro.component.css'],
+  providers: [MessageService]
 })
 export class AnadirRegistroComponent implements OnInit {
 
@@ -17,7 +20,10 @@ export class AnadirRegistroComponent implements OnInit {
   inputs: any[] = ["Descripcion", "Precio", "Cantidad", "Total"];
   tiposPago: string[] = ['Efectivo', 'Tarjeta De Debito', 'Tarjeta De Credito'];
 
-  constructor(private fb: FormBuilder, private historialService: HistorialService) { }
+  constructor(private fb: FormBuilder,
+              private historialService: HistorialService,
+              private historialComunicationService: HistorialComunicationService,
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.initFormulario();
@@ -28,10 +34,11 @@ export class AnadirRegistroComponent implements OnInit {
       fechaRegistro: [new Date, Validators.required],
       descripcion: [null, Validators.required],
       precio: [null, Validators.required],
-      cantidad: [null, Validators.required],
+      cantidad: [1, Validators.required],
       total: [{ value: '', disabled: true }, Validators.required],
       tipoPago: ['Efectivo', Validators.required],
-      observaciones: [null]
+      pago: [null, Validators.required],
+      observaciones: [null],
       });
   }
 
@@ -43,19 +50,31 @@ export class AnadirRegistroComponent implements OnInit {
         descripcion: this.formulario.value.descripcion,
         precio: this.formulario.value.precio,
         cantidad: this.formulario.value.cantidad,
-        total: this.formulario.value.total,
+        total: this.formulario.value.precio * this.formulario.value.cantidad,
         tipoDePago: this.formulario.value.tipoPago,
         observaciones: this.formulario.value.observaciones,
         id: this.pacienteId,
-        idTrabajo: null
+        idTrabajo: null,
+        debe: this.formulario.value.precio * this.formulario.value.cantidad - this.formulario.value.pago,
       };
 
       // Llamar al método del servicio para agregar un nuevo registro
       this.historialService.agregarHistorial(nuevoRegistro).subscribe(
         (historialAgregado) => {
           console.log('Registro agregado:', historialAgregado);
+          this.historialComunicationService.emitHistorialAgregado();
           // Aquí puedes manejar la respuesta, como mostrar un mensaje de éxito o redirigir a otra página
+
+          // Resetear el formulario
           this.formulario.reset();
+          // Reestablecer el valor del campo fechaRegistro a la fecha actual
+          this.formulario.patchValue({
+            fechaRegistro: new Date(),
+            tipoPago: 'Efectivo',
+            cantidad: 1,
+          });
+          this.formulario.get('total')?.disable(); // Deshabilitar el campo total nuevamente después de resetear
+          this.messageService.add({ severity: 'info', summary: 'Agregado', detail: 'Historial agregado' });
         },
         (error) => {
           console.error('Error al agregar el registro:', error);
@@ -63,10 +82,11 @@ export class AnadirRegistroComponent implements OnInit {
         }
       );
     } else {
-      console.log('Formulario inválido. Por favor, completa todos los campos requeridos.');
+      this.messageService.add({ severity: 'info', summary: 'Información', detail: 'Falta llenar campos' });
       this.formulario.markAllAsTouched();
     }
-  }
+}
+
 
   pagoChangeTimer: any;
 
@@ -107,6 +127,13 @@ export class AnadirRegistroComponent implements OnInit {
 
   clear() {
     this.formulario.reset();
-    this.formulario.get("fecha")?.setValue(new Date);
-  }
+    // Establecer la fecha actual en el campo 'fechaRegistro' después de reiniciar el formulario
+    this.formulario.patchValue({
+        fechaRegistro: new Date(),
+        tipoPago: 'Efectivo',
+        cantidad: 1,
+    });
+    this.formulario.get('total')?.disable(); // Deshabilitar el campo 'total' si es necesario
+}
+
 }

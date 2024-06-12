@@ -4,6 +4,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ClienteComunicacionService } from '../../services/ClienteComunicacionService.service';
 import { MessageService } from 'primeng/api';
 import { NuevoMedicoComponent } from '../../components/nuevo-medico/nuevo-medico.component';
+import { MedicoComunicacionService } from '../../services/MedicoComunication.service';
 
 @Component({
   selector: 'app-doctor',
@@ -18,7 +19,7 @@ export class DoctorComponent {
   constructor(
     private service: ClientesService,
     public dialogService: DialogService,
-    private clienteComunicacionService: ClienteComunicacionService,
+    private medicoComunicacionService: MedicoComunicacionService,
     private messageService: MessageService,) {
 
   }
@@ -29,13 +30,13 @@ export class DoctorComponent {
       }
     )
 
-    this.clienteComunicacionService.clienteAgregado$.subscribe(action => {
+    this.medicoComunicacionService.medicoAgregado$.subscribe(action => {
       if (action.action === 'crear') {
-        console.log('Se ha creado un cliente.');
-        this.messageService.add({ severity: 'info', summary: 'Confirmacion', detail: 'Se ha creado un cliente' });
+        console.log('Se ha agregado un Medico.');
+        this.messageService.add({ severity: 'info', summary: 'Confirmacion', detail: 'Se ha agregado un Medico' });
       } else if (action.action === 'editar') {
         console.log('Se ha editado un cliente:');
-        this.messageService.add({ severity: 'info', summary: 'Confirmacion', detail: 'Se ha editado un cliente' });
+        this.messageService.add({ severity: 'info', summary: 'Confirmacion', detail: 'Se ha editado un Medico' });
       }
     });
 
@@ -45,7 +46,6 @@ export class DoctorComponent {
     this.ref = this.dialogService.open(NuevoMedicoComponent, {
       header: 'Agregar Doctor',
       width: '30vw',
-      height: '85vh',
       modal: true,
       breakpoints: {
         '960px': '75vw',

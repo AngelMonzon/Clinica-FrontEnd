@@ -8,4 +8,5 @@ export interface Historial {
   tipoDePago:    number;
   observaciones: null;
   idTrabajo:     number | null;
+  debe: number | null;
 }

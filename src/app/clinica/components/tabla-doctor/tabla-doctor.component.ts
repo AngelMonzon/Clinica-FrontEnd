@@ -7,6 +7,8 @@ import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/a
 import { RegistroPacienteComponent } from '../registro-cliente/registro-paciente.component';
 import { ClienteComunicacionService } from '../../services/ClienteComunicacionService.service';
 import { MedicoService } from '../../services/medico.service';
+import { EditarMedicoComponent } from '../editar-medico/editar-medico.component';
+import { MedicoComunicacionService } from '../../services/MedicoComunication.service';
 
 @Component({
   selector: 'app-tabla-doctor',
@@ -37,7 +39,7 @@ export class TablaDoctorComponent {
     private messageService: MessageService,
     public dialogService: DialogService,
     private confirmationService: ConfirmationService,
-    private clienteComunicacionService: ClienteComunicacionService
+    private medicoComunicacionService: MedicoComunicacionService
   ) { }
 
   ngOnInit() {
@@ -58,10 +60,10 @@ export class TablaDoctorComponent {
     ];
 
     //Se ejecutara si se agrega un nuevo medico
-    this.clienteComunicacionService.clienteAgregado$.subscribe(() => {
+    this.medicoComunicacionService.medicoAgregado$.subscribe(() => {
       this.loading = true;
-      this.medicosService.getMedicos().subscribe((medicos) => { // Reemplaza getClientes por getMedicos
-        this.medicos = medicos; // Reemplaza clientes por medicos
+      this.medicosService.getMedicos().subscribe((medicos) => {
+        this.medicos = medicos;
         this.loading = false;
       });
 
@@ -77,24 +79,50 @@ export class TablaDoctorComponent {
     this.dt1?.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
-  //Método que abre la ventana para editar médico
-  showEdit(medico: Medico) { // Reemplaza Cliente por Medico
-    // Implementa la lógica para abrir la ventana de edición
-  }
+  //Diálogo de confirmación
+  borrarConfirm(event: Event, medico: Medico) { // Reemplaza Cliente por Medico
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Se borrara permanentemente este archivo',
+      header: 'Borrar',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass:"p-button-danger p-button-text",
+      rejectButtonStyleClass:"p-button-text p-button-text",
+      acceptIcon:"none",
+      rejectIcon:"none",
 
-  //Método que abre la ventana de registro del médico
-  showRegistro(medico: Medico) { // Reemplaza Cliente por Medico
-    // Implementa la lógica para abrir la ventana de registro
+      accept: () => {
+        this.medicosService.eliminarMedico(medico.id).subscribe(
+          medico => {
+            this.medicosService.getMedicos().subscribe(
+              medicos => {
+                this.medicos = medicos;
+              }
+            )
+            this.messageService.add({ severity: 'info', summary: 'Confirmacion', detail: 'Doctor Eliminado' });
+          }
+        );
+      },
+      reject: () => {
+          this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'Operacion Cancelada' });
+      }
+  });
   }
 
   visible: boolean = false;
 
-  showDialog(medico: Medico) { // Reemplaza Cliente por Medico
-    // Implementa la lógica para abrir la ventana de registro clínico
-  }
+  showEdit(doctor: Medico) {
+    this.ref = this.dialogService.open(EditarMedicoComponent, {
+      header: 'Editar Doctor',
+      width: '30%',
+      modal: true,
+      baseZIndex: 10000,
+      data: doctor
+    });
 
-  //Diálogo de confirmación
-  borrarConfirm(event: Event, medico: Medico) { // Reemplaza Cliente por Medico
-    // Implementa la lógica para el diálogo de confirmación
+    // Escuchar el evento de cierre para realizar acciones después de cerrar el diálogo
+    this.ref.onClose.subscribe(() => {
+      // Puedes hacer algo aquí si es necesario
+    });
   }
 }

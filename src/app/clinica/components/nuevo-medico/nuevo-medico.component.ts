@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ClientesService } from '../../services/clientes.service';
-import { Cliente } from '../../interfaces/cliente';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClienteComunicacionService } from '../../services/ClienteComunicacionService.service';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MedicoService } from '../../services/medico.service';
 import { Medico } from '../../interfaces/medico';
+import { MedicoComunicacionService } from '../../services/MedicoComunication.service';
 
 
 @Component({
@@ -21,7 +20,7 @@ export class NuevoMedicoComponent {
   constructor(
     private fb: FormBuilder,
     private service: MedicoService,
-    private clienteComunicacionService: ClienteComunicacionService,
+    private medicoComunicacionService: MedicoComunicacionService,
     public ref: DynamicDialogRef) {
     this.clienteForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}$/)]],
@@ -43,7 +42,7 @@ export class NuevoMedicoComponent {
 
       this.service.agregarMedico(medico).subscribe(
         response => {
-          this.clienteComunicacionService.emitClienteAgregado();  // Emitir el evento
+          this.medicoComunicacionService.emitMedicoAgregado();  // Emitir el evento
           console.log('Cliente agregado:', response);
           this.ref.close();
         },

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, OnInit, ElementRef } from '@angular/core';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, } from 'date-fns';
 import { Subject } from 'rxjs';
 // import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -40,6 +40,8 @@ const colors: Record<string, EventColor> = {
 export class ControlCitasComponent implements OnInit {
 
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
+
+  @ViewChild('scrollableDialog') private scrollableDialog!: ElementRef;
 
   view: CalendarView = CalendarView.Month;
 
@@ -171,7 +173,7 @@ export class ControlCitasComponent implements OnInit {
     });
   }
 
-
+  //Metodo que se ejecuta al seleccionar una cita en el calendario
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.showDialogIndividual(event);
@@ -184,7 +186,7 @@ export class ControlCitasComponent implements OnInit {
     const start = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1, 9, 0, 0);
     const end = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1, 10, 0, 0);
 
-    let eventCustom = {
+    let eventCustom: CalendarEvent = {
       title: 'Nueva Cita',
       start: start,
       end: end,
@@ -194,17 +196,42 @@ export class ControlCitasComponent implements OnInit {
         beforeStart: true,
         afterEnd: true,
       },
+      idPaciente: null,
+      nombrePaciente: null,
     };
 
     this.events.push(eventCustom);
 
     this.calendarEventService.addEvent(eventCustom).subscribe(
-      cita => this.updateEvents()
+      cita => {
+        console.log('Paso');
+
+        this.updateEvents()
+      }
     );
 
-    this.eventsSeleccionados = this.events;
 
-  }
+
+    const table = document.getElementById('tabla-citas');
+
+
+    //Desplazar hacia abajo
+    setTimeout(() => {
+      // Desplazar hacia abajo
+      const table = document.getElementById('tabla-citas');
+      if (table) {
+        table.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }
+
+      // Obtener la última fila de la tabla
+      const lastRow = table?.querySelector('tbody tr:last-child');
+
+      // Agregar clase de parpadeo a la última fila
+      if (lastRow) {
+        lastRow.classList.add('blink-effect');
+      }
+      }, 100);
+      }
 
   deletingEvent: boolean = false;
 
@@ -251,58 +278,8 @@ export class ControlCitasComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
 
-  titleChangeTimer: any;
 
-  onTitleChange(newTitle: string, event: CalendarEvent) {
-    // Cancela el temporizador anterior si existe
-    clearTimeout(this.titleChangeTimer);
-
-    // Actualizar titulo en BD
-    this.titleChangeTimer = setTimeout(() => {
-      this.calendarEventService.updateEvent(event).subscribe();
-    }, 2000);
-  }
-
-
-
-  dateChangeTimer: any;
-
-  onDateChange(event: CalendarEvent, calendario: number) {
-
-    clearTimeout(this.dateChangeTimer);
-
-    // Actualizar titulo en BD
-    this.dateChangeTimer = setTimeout(() => {
-
-      if (calendario === 1) {
-        event.end = new Date(event.start);
-        // Incrementar la hora en una unidad
-        event.end.setHours(event.end.getHours() + 1);
-
-        this.calendarEventService.updateEvent(event).subscribe();
-
-        this.refresh.next();
-      } else if(calendario === 2) {
-        console.log('Hola');
-
-        event.start = new Date(event.end.getFullYear(), event.end.getMonth(), event.end.getDate(), event.start.getHours())
-
-        this.refresh.next();
-
-        this.calendarEventService.updateEvent(event).subscribe(
-          event => {
-            this.refresh.next();
-          }
-        );
-
-        this.eventsSeleccionados = this.events;
-
-      }
-
-    }, 1000);
-  }
-
-
+  //Metodos para mostrar dialogos
   showDialog() {
     this.eventsSeleccionados = [];
     this.events.forEach(event => {
@@ -346,6 +323,7 @@ export class ControlCitasComponent implements OnInit {
     this.refresh.next();
   }
 
+  //Metodo que actualizara la lista de Eventos , dependiendo el mes seleccionado
   updateEvents(): void {
     const month = this.viewDate.getMonth() + 1; // getMonth() devuelve un valor de 0-11, por eso se suma 1
     const year = this.viewDate.getFullYear();
@@ -365,21 +343,96 @@ export class ControlCitasComponent implements OnInit {
     );
   }
 
-  onPacientChange(event: Event, cita: CalendarEvent): void {
-    const selectElement = event.target as HTMLSelectElement;
-    const selectedPacienteId = String(selectElement.value);
-    console.log(selectedPacienteId);
+  // Metodos para actualizar con la base de datos individualmente
+  ///////////////////////////////////////////////////////////////
 
-    let selectedCliente = this.clientes.find(cliente => cliente.nombre === selectedPacienteId) || null;
+  // Titulo  ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+  titleChangeTimer: any;
+
+  onTitleChange(event: CalendarEvent) {
+    // Cancela el temporizador anterior si existe
+    clearTimeout(this.titleChangeTimer);
+
+    // Actualizar titulo en BD
+    this.titleChangeTimer = setTimeout(() => {
+      this.calendarEventService.updateEvent(event).subscribe();
+    }, 2000);
+  }
+
+  // Paciente  ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+  onPacientChange(event: any, cita: CalendarEvent): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedPacienteNombre = String(selectElement.value);
+    console.log(selectedPacienteNombre);
+
+    let selectedCliente = this.clientes.find(cliente => cliente.nombre === selectedPacienteNombre) || null;
 
     cita.idPaciente = selectedCliente?.id;
+
+    cita.nombrePaciente = selectedPacienteNombre;
 
     console.log(cita.idPaciente);
 
 
-    this.calendarEventService.updateEvent(cita).subscribe()
+    this.calendarEventService.updateEvent(cita).subscribe(
+      cita => {
+        console.log('Logrado');
+
+      }
+    )
 
   }
 
+  // Colores  ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  colorChangeTimer: any;
+
+  onColorChange(event: CalendarEvent) {
+    // Cancela el temporizador anterior si existe
+    clearTimeout(this.colorChangeTimer);
+
+    // Actualizar titulo en BD
+    this.colorChangeTimer = setTimeout(() => {
+      this.calendarEventService.updateEvent(event).subscribe();
+    }, 2000);
+  }
+
+  // Fecha  ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+  dateChangeTimer: any;
+
+  onDateChange(event: CalendarEvent, calendario: number) {
+
+    clearTimeout(this.dateChangeTimer);
+
+    // Actualizar titulo en BD
+    this.dateChangeTimer = setTimeout(() => {
+
+      if (calendario === 1) {
+        event.end = new Date(event.start);
+        // Incrementar la hora en una unidad
+        event.end.setHours(event.end.getHours() + 1);
+
+        this.calendarEventService.updateEvent(event).subscribe();
+
+        this.refresh.next();
+      } else if(calendario === 2) {
+        console.log('Hola');
+
+        event.start = new Date(event.end.getFullYear(), event.end.getMonth(), event.end.getDate(), event.start.getHours())
+
+        this.refresh.next();
+
+        this.calendarEventService.updateEvent(event).subscribe(
+          event => {
+            this.refresh.next();
+          }
+        );
+
+        this.eventsSeleccionados = this.events;
+
+      }
+
+    }, 1000);
+  }
 
 }

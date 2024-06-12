@@ -125,3 +125,14 @@ th {
 .custom-select option {
   padding: 8px 12px;
 }
+
+/* Funcion para hacer que parpade una nueva cita*/
+@keyframes blink {
+  0% { background-color: gray; } /* Color de fondo inicial */
+  50% { background-color: transparent; } /* Cambio a transparente */
+  100% { background-color: gray; } /* Regreso al color de fondo inicial */
+}
+
+.blink-effect {
+  animation: blink 1.5s ease-in-out 3;
+}

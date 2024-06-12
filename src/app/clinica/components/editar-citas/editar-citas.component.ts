@@ -86,8 +86,11 @@ export class EditarCitasComponent implements OnInit {
         beforeStart: true,
         afterEnd: true,
       },
-      idPaciente: this.cliente.id
+      idPaciente: this.cliente.id,
+      nombrePaciente: this.cliente.nombre
     };
+    console.log(this.cliente.nombre);
+
 
     this.events = [
       ...this.events,

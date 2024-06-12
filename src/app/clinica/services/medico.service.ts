@@ -35,8 +35,8 @@ export class MedicoService {
   }
 
   // Actualizar un médico
-  actualizarMedico(id: number, medico: Medico): Observable<Medico> {
-    return this.http.put<Medico>(`${this.baseUrl}/update/${id}`, medico).pipe(
+  actualizarMedico(medico: Medico): Observable<Medico> {
+    return this.http.put<Medico>(`${this.baseUrl}/update/${medico.id}`, medico).pipe(
       catchError(this.handleError)
     );
   }

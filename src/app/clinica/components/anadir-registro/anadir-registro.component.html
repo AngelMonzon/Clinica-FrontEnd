@@ -44,6 +44,11 @@
 
     <!-- Observaciones -->
     <div>
+      <p-floatLabel class="pago">
+        <input id="pago" type="text" pInputText formControlName="pago"/>
+        <label for="pago">Pagó</label>
+      </p-floatLabel>
+
       <p-floatLabel class="observaciones">
         <input id="observaciones" type="text" pInputText formControlName="observaciones"/>
         <label for="observaciones">Observaciones</label>
@@ -55,3 +60,5 @@
     </div>
   </form>
 </div>
+
+<p-toast/>

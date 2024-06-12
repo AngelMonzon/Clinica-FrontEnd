@@ -36,8 +36,8 @@ export class HistorialService {
   }
 
   // Actualizar un historial
-  actualizarHistorial(id: number, historial: Historial): Observable<Historial> {
-    return this.http.put<Historial>(`${this.baseUrl}/update/${id}`, historial).pipe(
+  actualizarHistorial(historial: Historial): Observable<Historial> {
+    return this.http.put<Historial>(`${this.baseUrl}/update/${historial.id}`, historial).pipe(
       catchError(this.handleError)
     );
   }

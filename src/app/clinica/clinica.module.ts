@@ -43,6 +43,7 @@ import { EditarCitasComponent } from './components/editar-citas/editar-citas.com
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { RayosXComponent } from './components/rayos-x/rayos-x.component';
+import { EditarMedicoComponent } from './components/editar-medico/editar-medico.component';
 
 
 
@@ -75,6 +76,7 @@ import { RayosXComponent } from './components/rayos-x/rayos-x.component';
     NuevoProductoComponent,
     EditarCitasComponent,
     RayosXComponent,
+    EditarMedicoComponent,
 
   ],
   imports: [

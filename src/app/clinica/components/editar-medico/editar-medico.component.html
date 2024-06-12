@@ -1,16 +1,16 @@
 <div class="form-container">
 
-  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()" autocomplete="off">
+  <form [formGroup]="medicoForm" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <!-- Nombre -->
     <div class="form-group">
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" formControlName="nombre" required pInputText>
-      <div *ngIf="clienteForm.get('nombre')?.touched && clienteForm.get('nombre')?.hasError('required')"
+      <div *ngIf="medicoForm.get('nombre')?.touched && medicoForm.get('nombre')?.hasError('required')"
             class="label-danger">
         <p>El nombre es obligatorio.</p>
       </div>
-      <div *ngIf="clienteForm.get('nombre')?.touched && clienteForm.get('nombre')?.hasError('pattern')"
+      <div *ngIf="medicoForm.get('nombre')?.touched && medicoForm.get('nombre')?.hasError('pattern')"
             class="label-danger">
         <p>El nombre debe tener al menos 3 letras.</p>
       </div>
@@ -41,7 +41,7 @@
 
 
     <button class="submit-boton" type="submit"
-    [disabled]="clienteForm.invalid" pButton>Crear Paciente</button>
+    [disabled]="medicoForm.invalid" pButton>Crear Paciente</button>
 
   </form>
 </div>

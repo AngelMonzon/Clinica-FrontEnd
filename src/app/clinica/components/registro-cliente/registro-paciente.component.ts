@@ -44,7 +44,7 @@ export class RegistroPacienteComponent {
 
   editar: boolean = true;
 
-  activeIndex: number | number[] = 0;
+  activeIndexx: number | number[] = 0;
 
 
   // Variables para inputs
@@ -159,7 +159,7 @@ ngOnInit() {
 
 
 activeIndexChange(index: number | number[]) {
-  this.activeIndex = index
+  this.activeIndexx = index
 }
 
 

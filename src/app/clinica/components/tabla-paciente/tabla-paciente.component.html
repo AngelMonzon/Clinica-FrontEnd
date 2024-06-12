@@ -41,12 +41,6 @@
         </th>
         <th style="max-width: 14%; width: 14%;">
           <div class="flex align-items-center">
-            Cantidad
-            <p-columnFilter type="text" field="cantidad" display="menu"></p-columnFilter>
-          </div>
-        </th>
-        <th style="max-width: 14%; width: 14%;">
-          <div class="flex align-items-center">
             Total
             <p-columnFilter type="text" field="total" display="menu"></p-columnFilter>
           </div>
@@ -55,6 +49,12 @@
           <div class="flex align-items-center">
             Tipo de pago
             <p-columnFilter type="text" field="tipoDePago" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th style="max-width: 14%; width: 14%;">
+          <div class="flex align-items-center">
+            Debe
+            <p-columnFilter type="text" field="debe" display="menu"></p-columnFilter>
           </div>
         </th>
         <th style="max-width: 14%; width: 14%;">
@@ -83,16 +83,16 @@
           <span class="ml-1 vertical-align-middle"> {{ historial.descripcion }} </span>
         </td>
         <td>
-          {{ historial.precio }}
-        </td>
-        <td>
-          {{ historial.cantidad }}
+          {{ historial.precio }} <label *ngIf="historial.cantidad > 1">x {{ historial.cantidad }} </label>
         </td>
         <td>
           {{ historial.total }}
         </td>
         <td>
           {{ historial.tipoDePago }}
+        </td>
+        <td>
+          {{ historial.debe }}
         </td>
         <td>
           {{ historial.observaciones }}
@@ -103,18 +103,35 @@
             <img src="assets/images/borrar.png" alt="editar icono">
           </button>
 
+          <button pTooltip="Abonar" tooltipPosition="top" (click)="showDialogAbonar(historial)">
+            <img src="assets/images/abonar.png" alt="editar icono">
+          </button>
         </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="7">No se encontraron Pacientes
+        <td colspan="7">
+          No se encontraron Registros
         </td>
       </tr>
     </ng-template>
   </p-table>
   <p-toast></p-toast>
   <p-confirmDialog></p-confirmDialog>
+
+  <p-dialog header="Abonar a Cuenta" [(visible)]="visibleAbonar" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-5">Ingrese la cantidad a abonar: </span>
+    <div class="flex align-items-center gap-3 mb-3">
+        <label for="abonar" class="font-semibold w-6rem">Cantidad: </label>
+        <input pInputText id="abonar" class="flex-auto" autocomplete="off" [(ngModel)]="cantidadAbonar" />
+    </div>
+    <div class="flex justify-content-end gap-2">
+        <p-button label="Cancelar" severity="secondary" (click)="visibleAbonar = false" />
+        <p-button label="Abonar" (click)="abonar()" />
+    </div>
+</p-dialog>
+
 
 
 </div>
