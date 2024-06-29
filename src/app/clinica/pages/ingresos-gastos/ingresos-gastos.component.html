@@ -1,1 +1,15 @@
-<p>ingresos-gastos works!</p>
+
+<div class="contenedor ingresos" [routerLink]="['../ingresos']">
+  <h1>INGRESOS</h1>
+  <p-chart type="bar" [data]="basicData" [options]="basicOptions" />
+</div>
+
+<div class="contenedor gastos" [routerLink]="['../gastos']">
+  <h1>GASTOS</h1>
+</div>
+
+<div class="comparacion"[routerLink]="['../balance']">
+  <div>
+    <h3>Balance de ingresos y gastos</h3>
+  </div>
+</div>

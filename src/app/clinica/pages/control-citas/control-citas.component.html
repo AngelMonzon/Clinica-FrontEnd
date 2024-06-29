@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class="col-md-4">
-    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'es' }}</h3>
   </div>
   <div class="col-md-4">
     <div class="btn-group">
@@ -79,6 +79,7 @@
     [events]="events"
     [refresh]="refresh"
     [activeDayIsOpen]="activeDayIsOpen"
+    [locale]="locale"
     (dayClicked)="dayClicked($event.day, $event)"
     (eventClicked)="handleEvent('Clicked', $event.event)"
     (eventTimesChanged)="eventTimesChanged($event)"
@@ -90,6 +91,7 @@
     [viewDate]="viewDate"
     [events]="events"
     [refresh]="refresh"
+    [locale]="locale"
     (eventClicked)="handleEvent('Clicked', $event.event)"
     (eventTimesChanged)="eventTimesChanged($event)"
   >
@@ -99,6 +101,7 @@
     [viewDate]="viewDate"
     [events]="events"
     [refresh]="refresh"
+    [locale]="locale"
     (eventClicked)="handleEvent('Clicked', $event.event)"
     (eventTimesChanged)="eventTimesChanged($event)"
   >
@@ -127,8 +130,8 @@
           <tr>
             <th>Titulo</th>
             <th>Paciente</th>
-            <th>Color Primario</th>
-            <th>Secundario + Color Texto</th>
+            <th>Doctor Asignado</th>
+            <th>Color</th>
             <th>Inicia en</th>
             <th>Termina en</th>
             <th>Borrar</th>
@@ -153,6 +156,12 @@
               </select>
             </td>
             <td>
+              <select (change)="onMedicoChange($event, event)" [(ngModel)]="event.medico"
+              class="custom-select">
+                <option *ngFor="let medico of medicos" [value]="medico.nombre"> {{ medico.nombre }} </option>
+              </select>
+            </td>
+            <td>
               <input
                 type="color"
                 [ngModel]="event?.color?.primary"
@@ -161,22 +170,6 @@
                 (ngModelChange)="onColorChange(event)"
               />
 
-            </td>
-            <td>
-              <input class="mr-2"
-                type="color"
-                [ngModel]="event?.color?.secondary"
-                (ngModelChange)="event && event.color && (event.color.secondary = $event)"
-                (change)="refresh.next()"
-                (ngModelChange)="onColorChange(event)"
-              />
-              <input
-                type="color"
-                [ngModel]="event.color?.secondaryText ?? '#1e90ff'"
-                (ngModelChange)="event && event.color && (event.color.secondaryText = $event)"
-                (change)="refresh.next()"
-                (ngModelChange)="onColorChange(event)"
-              />
             </td>
             <!-- Seleccion de fecha -->
             <td>

@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private messageService: MessageService,
     private http: HttpClient) {
-      this.verificarImagen('http://localhost:8050/uploads/logo.jpg', 'assets/images/logotipo.jpg')
+      this.verificarImagen('http://localhost:8050/uploads/logo.png', 'assets/images/logotipo.jpg')
       .then(validUrl => this.logo = validUrl);
 
     }

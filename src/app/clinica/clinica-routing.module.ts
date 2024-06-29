@@ -10,6 +10,10 @@ import { PrescripcionComponent } from './pages/prescripcion/prescripcion.compone
 import { IngresosGastosComponent } from './pages/ingresos-gastos/ingresos-gastos.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { PuntoVentaComponent } from './pages/punto-venta/punto-venta.component';
+import { IngresosComponent } from './components/ingresos/ingresos.component';
+import { GastosComponent } from './components/gastos/gastos.component';
+import { BalanceComponent } from './components/balance/balance.component';
 
 export const routes: Routes = [
   {
@@ -22,9 +26,13 @@ export const routes: Routes = [
       { path: 'doctor', component: DoctorComponent},
       { path: 'farmacia', component: FarmaciaComponent},
       { path: 'ingresos-gastos', component: IngresosGastosComponent},
+      { path: 'ingresos', component: IngresosComponent},
+      { path: 'gastos', component: GastosComponent},
+      { path: 'balance', component: BalanceComponent},
       { path: 'pacientes', component: PacientesComponent},
       { path: 'prescripcion', component: PrescripcionComponent},
       { path: 'tratamiento', component: TratamientoComponent},
+      { path: 'venta', component: PuntoVentaComponent},
       { path: '**', redirectTo: 'pacientes'},
     ]
   }

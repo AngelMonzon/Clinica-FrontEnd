@@ -1,47 +1,66 @@
 <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
   <div class="grid-container">
     <div class="grid-item">
-      <label for="id">Id:</label>
-      <input type="text" formControlName="id">
+      <p-floatLabel>
+        <input id="nombreProducto" type="text" pInputText formControlName="nombreProducto" [ngClass]="{'input-error': formulario.get('nombreProducto')?.invalid && (formulario.get('nombreProducto')?.dirty || formulario.get('nombreProducto')?.touched)}"/>
+        <label for="nombreProducto">Nombre del Producto</label>
+      </p-floatLabel>
     </div>
     <div class="grid-item">
-      <label for="nombreProducto">Nombre del Producto:</label>
-      <input type="text" formControlName="nombreProducto">
+      <p-floatLabel>
+        <input id="nombreGenerico" type="text" pInputText formControlName="nombreGenerico"/>
+        <label for="nombreGenerico">Nombre Genérico</label>
+      </p-floatLabel>
     </div>
     <div class="grid-item">
-      <label for="nombreGenerico">Nombre Genérico:</label>
-      <input type="text" formControlName="nombreGenerico">
+      <p-floatLabel>
+        <select class="custom-select">
+          <option></option>
+        </select>
+        <label for="categoria">Categoría</label>
+      </p-floatLabel>
     </div>
     <div class="grid-item">
-      <label for="categoria">Categoría:</label>
-      <select formControlName="categoria">
-        <!-- Opciones de la categoría -->
-      </select>
+      <p-floatLabel>
+        <p-calendar id="fechaManufactura" appendTo="body" formControlName="fechaManufactura" dateFormat="dd/mm/yy"></p-calendar>
+        <label for="fechaManufactura">Fecha de Manufactura</label>
+      </p-floatLabel>
     </div>
     <div class="grid-item">
-      <label for="fechaManufactura">Fecha de Manufactura:</label>
-      <input type="date" formControlName="fechaManufactura">
+      <p-floatLabel>
+        <p-calendar id="fechaExpiracion" appendTo="body" formControlName="fechaExpiracion" dateFormat="dd/mm/yy"></p-calendar>
+        <label for="fechaExpiracion">Fecha de Expiración</label>
+      </p-floatLabel>
     </div>
     <div class="grid-item">
-      <label for="fechaExpiracion">Fecha de Expiración:</label>
-      <input type="date" formControlName="fechaExpiracion">
+      <p-floatLabel>
+        <input id="codigoBarra" type="text" pInputText formControlName="codigoBarra"/>
+        <label for="codigoBarra">Código de Barra</label>
+      </p-floatLabel>
     </div>
     <div class="grid-item">
-      <label for="codigoBarra">Código de Barra:</label>
-      <input type="text" formControlName="codigoBarra">
+      <p-floatLabel>
+        <input id="cantidad" type="number" pInputText formControlName="cantidad" [ngClass]="{'input-error': formulario.get('cantidad')?.invalid && (formulario.get('cantidad')?.dirty || formulario.get('cantidad')?.touched)}"/>
+        <label for="cantidad">Cantidad</label>
+      </p-floatLabel>
     </div>
     <div class="grid-item">
-      <label for="cantidad">Cantidad:</label>
-      <input type="number" formControlName="cantidad">
+      <p-floatLabel>
+        <input id="precioCompra" type="number" pInputText formControlName="precioCompra" [ngClass]="{'input-error': formulario.get('precioCompra')?.invalid && (formulario.get('precioCompra')?.dirty || formulario.get('precioCompra')?.touched)}"/>
+        <label for="precioCompra">Precio de Compra</label>
+      </p-floatLabel>
     </div>
     <div class="grid-item">
-      <label for="precioCompra">Precio de Compra:</label>
-      <input type="number" formControlName="precioCompra">
+      <p-floatLabel>
+        <input id="precioVenta" type="number" pInputText formControlName="precioVenta" [ngClass]="{'input-error': formulario.get('precioVenta')?.invalid && (formulario.get('precioVenta')?.dirty || formulario.get('precioVenta')?.touched)}"/>
+        <label for="precioVenta">Precio de Venta</label>
+      </p-floatLabel>
     </div>
     <div class="grid-item">
-      <label for="precioVenta">Precio de Venta:</label>
-      <input type="number" formControlName="precioVenta">
+      <button pButton type="submit" label="Agregar"></button>
     </div>
   </div>
-  <button type="submit">Enviar</button>
+
 </form>
+
+<p-toast></p-toast>

@@ -1,0 +1,60 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.contenedor {
+  display: inline-block;
+  width: 40%;
+  height: 65%;
+  margin: 4% 5%;
+  background-color: 		#dfe3ee; /* Blanco roto (gris muy claro) */
+  color: #333; /* Texto en gris oscuro para buen contraste */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), /* Sombra principal */
+              0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra secundaria */
+}
+
+.contenedor:hover {
+  transform: scale(1.1, 1.1);
+  cursor: pointer;
+}
+
+.contenedor h1 {
+  font-family: 'Merriweather-Regular';
+  text-align: center;
+  color: #333333;
+}
+
+.comparacion {
+  display: block;
+  width: 100%;
+  height: 15%;
+}
+
+.comparacion div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 100%;
+  margin: 0 auto;
+  background-color: 		#dfe3ee;
+  padding: 20px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), /* Sombra principal */
+              0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra secundaria */
+}
+
+.comparacion div:hover {
+  transform: scale(1.1, 1.1);
+  cursor: pointer;
+}
+
+.comparacion div h3 {
+  font-family: 'Merriweather-Regular';
+  text-align: center;
+  color: #333333;
+}

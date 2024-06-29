@@ -1,0 +1,28 @@
+:host {
+  position: relative;
+}
+.regresar {
+  position: absolute;
+  height: 80px;
+  top: 8px;
+  left: 8px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  filter: invert(32%) sepia(12%) saturate(2772%) hue-rotate(183deg) brightness(97%) contrast(87%);
+}
+
+.regresar:active {
+  transform: scale(1.1, 1.1);
+}
+
+.regresar img {
+  height: 100%;
+}
+
+@media screen and (max-width: 1350px) {
+  .regresar {
+    top: 0px;
+    left: 0px;
+  }
+}

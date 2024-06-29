@@ -1,0 +1,117 @@
+<div class="card">
+  <p-table #dt1 [value]="productos" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 25]" [loading]="loading" [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['id', 'nombreProducto', 'nombreGenerico', 'categoria', 'fechaManufactura', 'fechaExpiracion', 'codigoBarra', 'cantidad', 'precioCompra', 'precioVenta']"
+    styleClass="p-datatable-striped">
+
+    <ng-template pTemplate="caption">
+      <div class="flex" style="height: 50%;">
+        <button pButton label="Borrar Filtros" class="p-button-outlined h-full" icon="pi pi-filter-slash"
+          (click)="clear(dt1)"></button>
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Buscar"
+            [(ngModel)]="searchValue" class="search" />
+        </span>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>
+          <div class="flex align-items-center">
+            Id
+            <p-columnFilter field="id" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th>
+          <div class="flex align-items-center">
+            Nombre del Producto
+            <p-columnFilter field="nombreProducto" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th>
+          <div class="flex align-items-center">
+            Nombre Genérico
+            <p-columnFilter field="nombreGenerico" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th>
+          <div class="flex align-items-center">
+            Categoría
+            <p-columnFilter field="categoria" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th>
+          <div class="flex align-items-center">
+            Fecha de Manufactura
+            <p-columnFilter type="date" field="fechaManufactura" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th>
+          <div class="flex align-items-center">
+            Fecha de Expiración
+            <p-columnFilter type="date" field="fechaExpiracion" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th>
+          <div class="flex align-items-center">
+            Código de Barra
+            <p-columnFilter field="codigoBarra" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th>
+          <div class="flex align-items-center">
+            Cantidad
+            <p-columnFilter field="cantidad" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th>
+          <div class="flex align-items-center">
+            Precio de Compra
+            <p-columnFilter field="precioCompra" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th>
+          <div class="flex align-items-center">
+            Precio de Venta
+            <p-columnFilter field="precioVenta" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-producto>
+      <tr>
+        <td>{{ producto.id }}</td>
+        <td>{{ producto.nombreProducto }}</td>
+        <td>{{ producto.nombreGenerico }}</td>
+        <td>{{ producto.categoria }}</td>
+        <td>{{ producto.fechaManufactura | date: 'dd-MM-yyyy' }}</td>
+        <td>{{ producto.fechaExpiracion | date: 'dd-MM-yyyy' }}</td>
+        <td>{{ producto.codigoBarra }}</td>
+        <td>{{ producto.cantidad }}</td>
+        <td>{{ producto.precioCompra }}</td>
+        <td>{{ producto.precioVenta }}</td>
+        <td class="opciones">
+          <button pTooltip="Editar" tooltipPosition="top" (click)="showEdit(producto)">
+            <img src="assets/images/lapiz.png" alt="editar icono">
+          </button>
+          <button pTooltip="Borrar" tooltipPosition="top" (click)="borrarConfirm($event, producto)">
+            <img src="assets/images/borrar.png" alt="borrar icono">
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="11">No se encontraron productos</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-toast></p-toast>
+  <p-confirmDialog></p-confirmDialog>
+</div>

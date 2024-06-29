@@ -1,0 +1,108 @@
+<div class="pos-container">
+  <div class="pos-header">
+  </div>
+  <div class="pos-content">
+    <div class="patient-info">
+      <form [formGroup]="patientForm">
+        <img src="assets/images/cajero-automatico.png" alt="" class="cajero">
+        <div class="form-group" id="id">
+          <label for="patientId">ID:</label>
+          <select formControlName="patientId" class="custom-select" aria-placeholder="Id de Cliente" (change)="onClientSelectById($event)">
+            <option *ngFor="let cliente of clientes" [value]="cliente.id">
+              {{ cliente.id }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="patientName">Paciente:</label>
+          <select formControlName="patientName" class="custom-select" aria-placeholder="Cliente" (change)="onClientSelect($event)">
+            <option *ngFor="let cliente of clientes" [value]="cliente.nombre">
+              {{ cliente.nombre }}
+            </option>
+          </select>
+        </div>
+      </form>
+    </div>
+
+    <div class="anadir">
+
+      <!-- Anadir Tratamiento -->
+      <form [formGroup]="nuevoTratamientoForm">
+        <div class="tratamiento">
+          <label for="tratamiento">Tratamiento: </label>
+          <select formControlName="descripcion" class="custom-select" aria-placeholder="Cliente" (change)="onTreatmentChange($event)">
+            <option *ngFor="let historial of historialClientes" [value]="historial.idTrabajo">
+              {{ historial.descripcion }} fecha: {{ historial.fecha | date:'dd/MM/yyyy' }} - Debe: {{ historial.debe }}
+            </option>
+          </select>
+        </div>
+        <div class="abonar">
+          <p-floatLabel>
+            <input id="abonar" type="number" pInputText formControlName="abonar"/>
+            <label for="abonar">Abonar</label>
+          </p-floatLabel>
+
+          <button pButton (click)="addTreatment()">Agregar</button>
+        </div>
+      </form>
+
+      <!-- Anadir Producto -->
+      <form [formGroup]="nuevoProductoForm" class="producto">
+        <div class="tratamiento">
+          <label for="tratamiento">Producto: </label>
+          <select formControlName="nombreProducto" class="custom-select" aria-placeholder="Cliente" (change)="onProductChange($event)">
+            <option *ngFor="let producto of productos" [value]="producto.id">
+              {{ producto.nombreProducto }} - ${{ producto.precioVenta }}
+            </option>
+          </select>
+        </div>
+        <div class="abonar">
+          <p-floatLabel>
+            <input id="abonar" type="number" pInputText formControlName="cantidad"/>
+            <label for="abonar">Cantidad</label>
+          </p-floatLabel>
+
+          <button pButton (click)="addProduct()">Agregar</button>
+        </div>
+      </form>
+    </div>
+
+
+    <!-- tabla donde se iran mostrando los productos agregados -->
+    <div class="billing-info">
+      <h2>Información de Facturación</h2>
+      <p-table [value]="billItems" id="tabla" #dt>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Tratamiento / Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item style="height: 70%;">
+          <tr>
+            <td>{{ item.treatment }}</td>
+            <td>{{ item.price | currency }}</td>
+            <td class="text-center">{{ item.cantidad }} </td>
+            <td>{{ item.price * item.cantidad | currency}} </td>
+            <td>
+              <button (click)="removeTreatment(item)">Eliminar</button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <div class="total">
+        <button type="button" (click)="finalizeSale()">
+          Pagar
+          <img src="assets/images/dinero.png" alt="">
+        </button>
+        <h3>Total: {{ total | currency }}</h3>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<p-toast />

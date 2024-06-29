@@ -1,9 +1,13 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { VentaComunicationService } from '../../services/ventasComunication.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css'
+  styleUrl: './layout.component.css',
+  providers: [MessageService]
 })
 export class LayoutComponent implements  OnInit {
 
@@ -20,6 +24,11 @@ export class LayoutComponent implements  OnInit {
   contenidoAgrandar: any = {padding: '20px', width: '100%', 'box-sizing': 'border-box'};
 
   contenido: any;
+
+  constructor(
+    private ventaService: VentaComunicationService,
+    public messageService: MessageService,
+    private cd: ChangeDetectorRef){}
 
   ngOnInit(): void {
     if (window.innerWidth < 1350){

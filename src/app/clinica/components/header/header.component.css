@@ -35,22 +35,57 @@ h1 {
   color: #ffffff;
 }
 
-.cerrar-sesion {
+.botones {
   position: absolute;
   right: 15px;
+  height: 100%;
+}
+
+.cerrar-sesion, .ventas {
+  height: 100%;
+  padding: 4px 0px;
+  box-sizing: border-box;
   border: none;
   background-color: transparent;
   transition: all 300ms;
-  height: 80%;
+  margin-right: 15px;
 }
 
-.cerrar-sesion:hover {
+.cerrar-sesion:hover, .ventas:hover {
   transform: scale(1.1, 1.1);
   cursor: pointer;
 }
 
-.cerrar-sesion img {
+.cerrar-sesion img, .ventas img {
   height: 100%;
+}
+
+.ventas img {
+  filter: invert(99%) sepia(37%) saturate(94%) hue-rotate(187deg) brightness(111%) contrast(94%);
+}
+
+p-sidebar {
+  position: relative !important;
+}
+
+.boton-cerrar {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 42px;
+  border: none;
+  border-radius: 200px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.boton-cerrar:hover {
+  background-color: #5b7bb2;
+}
+
+.boton-cerrar img {
+  width: 100%;
+  color: white;
 }
 
 

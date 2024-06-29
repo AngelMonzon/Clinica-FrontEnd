@@ -16,7 +16,7 @@ interface UploadEvent {
 export class LogotipoComponent implements OnInit {
   uploadedFiles: any[] = [];
 
-  selectedImage: string = 'http://localhost:8050/uploads/logo.jpg';
+  selectedImage: string = 'http://localhost:8050/uploads/logo.png';
 
   constructor(private messageService: MessageService, private logoService: LogoService) {}
 

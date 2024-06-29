@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit, input } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { FileUploadEvent } from 'primeng/fileupload';
-import { RayosXService } from '../../services/royosX.service';
+import { RayosXService } from '../../services/rayosX.service';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @Component({

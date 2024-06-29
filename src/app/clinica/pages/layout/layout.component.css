@@ -16,7 +16,7 @@
 .sidebar {
   display: inline-block;
   vertical-align: top;
-  width: 15%;
+  width: 6%;
   height: 90%;
   padding: 10px;
   box-sizing: border-box;
@@ -26,7 +26,7 @@
 .contenido {
   display: inline-block;
   vertical-align: top;
-  width: 85%;
+  width: 94%;
   height: 85%;
 }
 

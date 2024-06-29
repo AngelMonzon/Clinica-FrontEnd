@@ -30,7 +30,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-
+import { ChartModule } from 'primeng/chart';
 
 
 
@@ -65,7 +65,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     ImageModule,
     ScrollTopModule,
     ConfirmPopupModule,
-
+    ChartModule,
 
   ]
 })

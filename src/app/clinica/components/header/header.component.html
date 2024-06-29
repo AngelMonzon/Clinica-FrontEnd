@@ -4,9 +4,15 @@
 
 <h1> {{ clinicaDatos.nombreClinica }} </h1>
 
-<button class="cerrar-sesion" (click)="logout()"><img src="assets/images/cerrar-sesion.png" alt=""></button>
+<div class="botones">
+  <button class="ventas" routerLink="venta"><img src="assets/images/venta.png" alt=""></button>
+  <button class="cerrar-sesion" (click)="logout()"><img src="assets/images/cerrar-sesion.png" alt=""></button>
+</div>
 
 <p-sidebar [(visible)]="sidebarVisible" position="left"
-[style]="{'background-color': '#3b5998'}" (blockScroll)="true">
+[style]="{'background-color': '#3b5998'}" styleClass="w-10rem" (blockScroll)="true">
+  <button (click)="sidebarVisible = false" class="boton-cerrar">
+    <img src="assets/images/cruz.svg" alt="cerrar">
+  </button>
   <app-sidebar></app-sidebar>
 </p-sidebar>

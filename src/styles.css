@@ -4,6 +4,23 @@
 @import "primeflex/primeflex.css";
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
+@font-face {
+  font-family: 'Roboto';
+  src: url('assets/fonts/Roboto-Italic.ttf') format('ttf'),
+       url('assets/fonts/Roboto-Italic.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merriweather-Regular';
+  src: url('assets/fonts/Merriweather-Regular.ttf') format('ttf'),
+       url('assets/fonts/Merriweather-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 
 body {
   margin: 0;
@@ -77,6 +94,8 @@ p-table {
 }
 
 
+
+
 /* Estilos para opciones de la tabla clientes */
 
 .p-speeddial-direction-up {
@@ -94,8 +113,19 @@ p-table {
   padding-bottom: 5px;
 }
 
+.p-sidebar-content {
+  padding: 0px !important;
+}
+
+.p-sidebar-header {
+  padding: .3rem;
+  display: none;
+}
 
 
+.p-sidebar-icon:hover {
+  background-color: #5b7bb2;
+}
 
 /* .p-dialog-header {
   display: none;

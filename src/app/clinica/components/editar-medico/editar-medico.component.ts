@@ -29,7 +29,7 @@ export class EditarMedicoComponent {
       this.medico = this.config.data;
       this.medicoForm = this.fb.group({
         id: [this.medico.id],
-        nombre: [this.medico.nombre, [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}$/)]],
+        nombre: [this.medico.nombre, [Validators.required]],
         especialidad: [this.medico.especialidad],
         direccion: [this.medico.direccion],
         telefono: [this.medico.telefono],
@@ -41,7 +41,10 @@ export class EditarMedicoComponent {
     this.generos = [
       { name: 'Femenino', code: 'Femenino' },
       { name: 'Masculino', code: 'Masculino' },
-  ];  }
+  ];
+  this.medicoForm.get('nombre')?.disable();
+
+}
 
   onSubmit() {
     const medico: Medico = this.medicoForm.value;

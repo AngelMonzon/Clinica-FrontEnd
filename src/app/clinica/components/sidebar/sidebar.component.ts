@@ -9,36 +9,38 @@ export class SidebarComponent {
   items: any[] = [
     {
       titulo: "Pacientes",
-      link: "pacientes"
+      link: "pacientes",
+      img: "paciente.png"
     },
     {
-      titulo: "Control de Citas",
-      link: "control-citas"
+      titulo: "Citas",
+      link: "control-citas",
+      img: "cita.png"
     },
     {
       titulo: "Doctor",
-      link: "doctor"
+      link: "doctor",
+      img: "doctor.png"
     },
     {
-      titulo: "Ingresos y Gastos",
-      link: "ingresos-gastos"
+      titulo: "Ingresos",
+      link: "ingresos-gastos",
+      img: "ingresosGastos.png"
     },
     {
-      titulo: "Farmacia",
-      link: "farmacia"
+      titulo: "Productos",
+      link: "farmacia",
+      img: "productos.png"
     },
     {
       titulo: "Tratamiento",
-      link: "tratamiento"
+      link: "tratamiento",
+      img: "tratamiento.png"
     },
     {
       titulo: "Prescripcion",
-      link: "prescripcion"
-    },
-    {
-      titulo: "Administracion",
-      link: "administracion"
-    },
-
+      link: "prescripcion",
+      img: "prescripcion.png"
+    }
   ]
 }

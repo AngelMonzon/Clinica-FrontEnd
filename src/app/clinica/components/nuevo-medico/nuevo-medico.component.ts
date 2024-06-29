@@ -13,7 +13,7 @@ import { MedicoComunicacionService } from '../../services/MedicoComunication.ser
   styleUrl: './nuevo-medico.component.css'
 })
 export class NuevoMedicoComponent {
-  clienteForm: FormGroup;
+  medicoForm!: FormGroup;
 
   generos: any;  // Opcional, si quieres tener una lista de géneros
 
@@ -22,8 +22,8 @@ export class NuevoMedicoComponent {
     private service: MedicoService,
     private medicoComunicacionService: MedicoComunicacionService,
     public ref: DynamicDialogRef) {
-    this.clienteForm = this.fb.group({
-      nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}$/)]],
+    this.medicoForm = this.fb.group({
+      nombre: ['', [Validators.required]],
       especialidad: [''],
       direccion: [''],
       telefono: [''],
@@ -34,11 +34,12 @@ export class NuevoMedicoComponent {
     this.generos = [
       { name: 'Femenino', code: 'Femenino' },
       { name: 'Masculino', code: 'Masculino' },
-  ];  }
+  ];
+ }
 
   onSubmit() {
     // Aquí puedes manejar la lógica para guardar el cliente
-    const medico: Medico = this.clienteForm.value;
+    const medico: Medico = this.medicoForm.value;
 
       this.service.agregarMedico(medico).subscribe(
         response => {

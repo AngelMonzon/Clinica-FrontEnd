@@ -14,6 +14,8 @@ import { Paciente } from '../../interfaces/paciente';
 import { PacientesService } from '../../services/pacientes.service';
 import { Cliente } from '../../interfaces/cliente';
 import { ClientesService } from '../../services/clientes.service';
+import { Medico } from '../../interfaces/medico';
+import { MedicoService } from '../../services/medico.service';
 
 
 
@@ -45,11 +47,15 @@ export class ControlCitasComponent implements OnInit {
 
   view: CalendarView = CalendarView.Month;
 
+  locale: string = 'es';
+
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
 
   clientes: Cliente[] = [];
+
+  medicos: Medico[] = [];
 
   //Variable para p-dialog
   visible: boolean = false;
@@ -100,7 +106,8 @@ export class ControlCitasComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private calendarEventService: CalendarEventService,
     private cdr: ChangeDetectorRef,
-    private clientesService: ClientesService) {
+    private clientesService: ClientesService,
+    private medicoService: MedicoService) {
   }
 
   ngOnInit(): void {
@@ -110,6 +117,12 @@ export class ControlCitasComponent implements OnInit {
     this.clientesService.getClientes().subscribe(
       clientes => {
         this.clientes = clientes;
+      }
+    )
+
+    this.medicoService.getMedicos().subscribe(
+      medicos => {
+        this.medicos = medicos;
       }
     )
   }
@@ -308,19 +321,7 @@ export class ControlCitasComponent implements OnInit {
 
     this.visible = false;
 
-    this.events.forEach(event => {
-      console.log(event);
 
-      if (this.eventsBase.includes(event)) {
-
-      } else {
-        this.calendarEventService.addEvent(event).subscribe();
-      }
-    });
-
-    this.eventsBase = this.events;
-
-    this.refresh.next();
   }
 
   //Metodo que actualizara la lista de Eventos , dependiendo el mes seleccionado
@@ -363,7 +364,6 @@ export class ControlCitasComponent implements OnInit {
   onPacientChange(event: any, cita: CalendarEvent): void {
     const selectElement = event.target as HTMLSelectElement;
     const selectedPacienteNombre = String(selectElement.value);
-    console.log(selectedPacienteNombre);
 
     let selectedCliente = this.clientes.find(cliente => cliente.nombre === selectedPacienteNombre) || null;
 
@@ -372,6 +372,25 @@ export class ControlCitasComponent implements OnInit {
     cita.nombrePaciente = selectedPacienteNombre;
 
     console.log(cita.idPaciente);
+
+
+    this.calendarEventService.updateEvent(cita).subscribe(
+      cita => {
+        console.log('Logrado');
+
+      }
+    )
+
+  }
+
+  // Medico  ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+  onMedicoChange(event: any, cita: CalendarEvent): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedMedicoNombre = String(selectElement.value);
+
+    let selectedMedico = this.medicos.find(medico => medico.nombre === selectedMedicoNombre) || null;
+
+    cita.medico = selectedMedicoNombre;
 
 
     this.calendarEventService.updateEvent(cita).subscribe(

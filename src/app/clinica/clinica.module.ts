@@ -44,6 +44,13 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { RayosXComponent } from './components/rayos-x/rayos-x.component';
 import { EditarMedicoComponent } from './components/editar-medico/editar-medico.component';
+import { TablaProductoComponent } from './components/tabla-productos/tabla-productos.component';
+import { EditarProductoComponent } from './components/editar-producto/editar-producto.component';
+import { PuntoVentaComponent } from './pages/punto-venta/punto-venta.component';
+import { PagarComponent } from './components/pagar/pagar.component';
+import { IngresosComponent } from './components/ingresos/ingresos.component';
+import { GastosComponent } from './components/gastos/gastos.component';
+import { BalanceComponent } from './components/balance/balance.component';
 
 
 
@@ -77,7 +84,13 @@ import { EditarMedicoComponent } from './components/editar-medico/editar-medico.
     EditarCitasComponent,
     RayosXComponent,
     EditarMedicoComponent,
-
+    TablaProductoComponent,
+    EditarProductoComponent,
+    PuntoVentaComponent,
+    PagarComponent,
+    IngresosComponent,
+    GastosComponent,
+    BalanceComponent
   ],
   imports: [
     CommonModule,
